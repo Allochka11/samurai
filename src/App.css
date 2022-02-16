@@ -1,30 +1,154 @@
-.app-wrapper {
-    display: grid;
+body{
+    height: 100%;
+    line-height: 1;
+    font-size: 24px;
+    background-color: #ffffff;
+    color: black;
 
-    grid-template-areas:
-    "h h"
-    "n c ";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    /*grid-gap: 10px;*/
-    width: 1200px;
-    margin: 0 auto;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.wrapper {
+    min-height: 100%;
+    /*width: 100%;*/
+    /*min-height: 100%;*/
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.main {
+    /*flex: 1;*/
+    min-height: 100%;
+}
+.footer {
+    /*position: absolute;*/
+    /*bottom: 0;*/
+}
+
+@media(max-width:1200px) {
+    .container {
+        max-width: 970px;
+    }
+}
+
+@media(max-width:992px) {
+    .container {
+        max-width: 750px;
+    }
+}
+
+@media(max-width:767px) {
+    .container {
+        min-width: 200px;
+        /*max-width: 200px;*/
+    }
+}
 .header {
-    grid-area: h;
-    background-color: #EEACACFF;
+    background-color: #57a5ff;
+    margin-bottom: 20px;
+}
+
+.header__row {
+    display: flex;
+    justify-content:left;
+    height: 80px;
+    align-items: center;
+}
+.header__logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
 }
 .header img {
     width: 70px;
 }
 
-.nav {
-    grid-area: n;
-    background-color: blue;
+.main__row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-basis: auto;
+    flex-direction: row;
+    /*justify-content: center;*/
+}
+.navbar {
+    margin-right: 20px;
+
+}
+.main_info {
+    margin: 0 auto;
 }
 
-.content {
-    grid-area: c;
-    background-color: yellow;
+
+.main {
+    flex: 1 1 auto;
+}
+
+
+.profile_img {
+    display: block;
+    width: 600px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.profile_img img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+
+}
+.avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    margin-right: 20px;
+}
+
+.profile__info {
+
+}
+
+
+
+/*header,aside,article,footer{*/
+/*    padding-left:20px;*/
+/*}*/
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    height:100px;
+    background: #57a5ff;
+    order:4;
 }
