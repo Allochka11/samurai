@@ -1,10 +1,9 @@
 body{
-    height: 100%;
+    min-height: 100%;
     line-height: 1;
     font-size: 24px;
     background-color: #ffffff;
     color: black;
-
 }
 
 ul {
@@ -23,8 +22,6 @@ a {
 
 .wrapper {
     min-height: 100%;
-    /*width: 100%;*/
-    /*min-height: 100%;*/
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -37,33 +34,7 @@ a {
     padding: 0 15px;
 }
 
-.main {
-    /*flex: 1;*/
-    min-height: 100%;
-}
-.footer {
-    /*position: absolute;*/
-    /*bottom: 0;*/
-}
 
-@media(max-width:1200px) {
-    .container {
-        max-width: 970px;
-    }
-}
-
-@media(max-width:992px) {
-    .container {
-        max-width: 750px;
-    }
-}
-
-@media(max-width:767px) {
-    .container {
-        min-width: 200px;
-        /*max-width: 200px;*/
-    }
-}
 .header {
     background-color: #57a5ff;
     margin-bottom: 20px;
@@ -100,12 +71,6 @@ a {
     margin: 0 auto;
 }
 
-
-.main {
-    flex: 1 1 auto;
-}
-
-
 .profile_img {
     display: block;
     width: 600px;
@@ -134,21 +99,86 @@ a {
     margin-right: 20px;
 }
 
-.profile__info {
-
-}
-
-
-
-/*header,aside,article,footer{*/
-/*    padding-left:20px;*/
-/*}*/
-
 .footer {
     position: absolute;
     bottom: 0;
     width:100%;
-    height:100px;
+    height:50px;
     background: #57a5ff;
-    order:4;
+}
+
+@media(max-width:1200px) {
+    .container {
+        max-width: 970px;
+    }
+}
+
+@media(max-width:992px) {
+    .container {
+        max-width: 750px;
+    }
+    .profile_img {
+        display: block;
+        width: 500px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width:767px) {
+    body {
+        font-size: 18px;
+    }
+
+    .container {
+        /*min-width: 300px;*/
+        max-width: 737px;
+    }
+
+    .profile_img {
+        display: block;
+        width: 250px;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+
+    .navbar {
+        margin-right: 10px;
+    }
+
+}
+
+@media(max-width:400px) {
+    .container {
+        /*min-width: 200px;*/
+        max-width: 370px;
+    }
+
+    .profile_img {
+        display: block;
+        width: 250px;
+        height: 75px;
+        margin-bottom: 20px;
+    }
+    .main__row {
+        flex-direction: column;
+
+    }
+    .navbar {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    ul {
+        display: flex;
+        justify-content: space-between;
+
+    }
+    body {
+        font-size: 14px;
+    }
+    .header {
+        margin-bottom: 3px;
+    }
+
+
 }
