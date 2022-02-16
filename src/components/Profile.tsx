@@ -10,7 +10,7 @@ function Profile() {
                 </div>
                 <div className="avatar">
                     <img src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt=""/>
-                    <div className="profile_desc">Vasya Pupkin</div>
+                    <div className="profile_desc">Vasya Pupkina</div>
                 </div>
                 <div className="profile__info">
                     <div>My Posts</div>

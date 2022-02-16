@@ -4,6 +4,7 @@ function Header() {
 
     return (
         <div className="header">
+            <button/>
             <div className="container">
                 <div className="header__row">
                     <img src="https://w7.pngwing.com/pngs/619/196/png-transparent-dog-logo-minimalism-graphic-design-dog-animals-text-trademark.png" className="header__logo"></img>
