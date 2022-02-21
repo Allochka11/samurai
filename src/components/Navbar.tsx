@@ -1,18 +1,26 @@
 import React from 'react';
 
-function Navbar() {
+type NavbarPropsType = {
+    profileUrl: string,
+    massagesUrl: string,
+    newsUrl: string,
+    musicUrl: string,
+    settingsUrl: string
+}
+
+function Navbar(props: NavbarPropsType) {
 
     return (
-
         <div className="navbar">
-            <ul>
-
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Massages</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Music</a></li>
-                <li><a href="#">Settings</a></li>
-            </ul>
+            <div className="navbar__container">
+                <ul className="navbar__item">
+                    <li><a href={props.profileUrl}>Profile</a></li>
+                    <li><a href={props.massagesUrl}>Massages</a></li>
+                    <li><a href={props.newsUrl}>News</a></li>
+                    <li><a href={props.musicUrl}>Music</a></li>
+                    <li><a href={props.settingsUrl}>Settings</a></li>
+                </ul>
+            </div>
         </div>
     )
 }

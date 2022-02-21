@@ -1,14 +1,15 @@
 import React from 'react';
 
-function Header() {
+type HeaderPropsType = {
+    headerLogo: string,
+}
+
+function Header(props:HeaderPropsType) {
 
     return (
         <div className="header">
-            <button/>
-            <div className="container">
-                <div className="header__row">
-                    <img src="https://w7.pngwing.com/pngs/619/196/png-transparent-dog-logo-minimalism-graphic-design-dog-animals-text-trademark.png" className="header__logo"></img>
-                </div>
+            <div className="header__row">
+                <img src={props.headerLogo} alt="" className="header__logo"/>
             </div>
         </div>
     )

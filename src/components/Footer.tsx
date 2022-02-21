@@ -4,11 +4,8 @@ function Footer() {
 
     return (
         <div className="footer">
-            <button/>
-            <div className="container">
-                <div className="footer__text">
-                    Footer
-                </div>
+            <div className="footer__container">
+                <p>FOOTER</p>
             </div>
         </div>
     )
