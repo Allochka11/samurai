@@ -1,4 +1,5 @@
 import React from 'react';
+import MyPosts from "./MyPosts/MyPosts";
 
 type ProfilePropsType = {
     userName: string,
@@ -18,24 +19,7 @@ function Profile(props:ProfilePropsType) {
                     <img src={props.avatarUrl} alt="avatar" className="profile__avatar"/>
                     <div className="profile__name">{props.userName}</div>
                 </div>
-                <div className="posts">
-                    <div className="posts__container">
-                        <h3>Posts:</h3>
-                        <div className="posts__items">
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                            <div className="posts__item">lflflfl</div>
-                        </div>
-                    </div>
-                </div>
+                <MyPosts />
             </div>
         </div>
     )
