@@ -13,9 +13,9 @@ function MyPosts(props: MyPostsPropsType) {
             <div className="posts">
                 <div className="posts__container">
                     <h3>Posts:</h3>
-                    <Post/>
-                    <Post/>
-                    <Post/>
+                    <Post message={"Hi, how are you?"}/>
+                    <Post message ={"It's my first post"}/>
+
                 </div>
             </div>
     )

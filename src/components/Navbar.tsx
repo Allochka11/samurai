@@ -1,24 +1,25 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-type NavbarPropsType = {
-    profileUrl: string,
-    massagesUrl: string,
-    newsUrl: string,
-    musicUrl: string,
-    settingsUrl: string
-}
+// type NavbarPropsType = {
+//     // profileUrl: string,
+//     // massagesUrl: string,
+//     // newsUrl: string,
+//     // musicUrl: string,
+//     // settingsUrl: string
+// }
 
-function Navbar(props: NavbarPropsType) {
+function Navbar() {
 
     return (
         <div className="navbar">
             <div className="navbar__container">
                 <ul className="navbar__item">
-                    <li><a href={props.profileUrl}>Profile</a></li>
-                    <li><a href={props.massagesUrl}>Massages</a></li>
-                    <li><a href={props.newsUrl}>News</a></li>
-                    <li><a href={props.musicUrl}>Music</a></li>
-                    <li><a href={props.settingsUrl}>Settings</a></li>
+                    <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/dialogs">Dialogs</Link></li>
+                    <li><Link to="/news">News</Link></li>
+                    <li><Link to="/music">Music</Link></li>
+                    <li><Link to="/settings">Settings</Link></li>
                 </ul>
             </div>
         </div>
