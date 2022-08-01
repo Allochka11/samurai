@@ -9,7 +9,7 @@ type PostPropsType = {
 
 function Post(props: PostPropsType) {
 
-    console.log(props)
+    // console.log(props)
 
     return (
         <div className="posts__items">

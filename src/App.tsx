@@ -27,14 +27,8 @@ function App() {
                         <Navbar/>
                         <div className="content__right">
                             <Routes>
-                                <Route path="/dialogs" element={<Dialogs/>} />
-                                <Route path="/profile" element=
-                                    {<Profile
-                                        userName={'Vasya Pupkin'}
-                                        avatarUrl={'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'}
-                                        profileHeaderImg={'https://www.searchenginejournal.com/wp-content/uploads/2018/10/How-to-Boost-Your-Images%E2%80%99-Visibility-on-Google-Images-760x400.png'}
-                                    />}
-                                />
+                                <Route path="/dialogs/*" element={<Dialogs/>} />
+                                <Route path="/profile" element={<Profile/>}/>
                             </Routes>
                             {/*<Dialogs/>*/}
                         </div>
