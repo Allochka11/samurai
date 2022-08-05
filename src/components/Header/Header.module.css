@@ -1,0 +1,14 @@
+.header {
+    background-color: blue;
+    height: 70px;
+    margin-bottom: 20px;
+}
+.header__row {
+    margin-bottom: 20px;
+}
+
+.header__logo {
+    margin: 10px 20px;
+    width: 50px;
+    border-radius: 50%;
+}

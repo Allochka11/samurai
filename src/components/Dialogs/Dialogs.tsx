@@ -1,7 +1,9 @@
 import React from 'react';
 import MyPosts from "../Profile/MyPosts/MyPosts";
 import {Link, NavLink} from "react-router-dom";
-import {Messages} from "./Messages";
+import {Messages} from "./Messages/Messages";
+
+import s from './Dialogs.module.css';
 
 type DialogsPropsType = {
     // userName: string,
@@ -34,11 +36,11 @@ const Message = (props:MessagePropsType) => {
         </div>
     )
 }
-const Dialogs = () => {
+export const Dialogs = () => {
 
     return (
-        <div className="dialogs">
-            <div>
+        <div className={s.dialogs}>
+            <div className={s.dialogs__item}>
                 <DialogItem name={'Alla'} id={1}/>
                 <DialogItem name={'Ann'} id={2}/>
                 <DialogItem name={'Oll'} id={3}/>
@@ -67,4 +69,4 @@ const Dialogs = () => {
     )
 }
 
-export default Dialogs;
+// export default Dialogs;

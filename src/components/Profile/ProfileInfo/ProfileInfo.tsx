@@ -1,5 +1,6 @@
 import React from "react";
 import MyPosts from "../MyPosts/MyPosts";
+import s from './ProfileInfo.module.css';
 
 type ProfileInfoType = {}
 
@@ -13,12 +14,12 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     
     return(
         <div>
-            <div className="profile__header">
-                <img src={profiles.profileHeaderImg} alt="avatar header"/>
+            <div className={s.profile__header}>
+                <img src={profiles.profileHeaderImg} alt={`${s.avatar}+ ${s.header}`}/>
             </div>
-            <div className="profile__main">
-                <img src={profiles.avatarUrl} alt="avatar" className="profile__avatar"/>
-                <div className="profile__name">{profiles.userName}</div>
+            <div className={s.profile__main}>
+                <img src={profiles.avatarUrl} alt="avatar" className={s.profile__avatar}/>
+                <div className={s.profile__name}>{profiles.userName}</div>
             </div>
 
         

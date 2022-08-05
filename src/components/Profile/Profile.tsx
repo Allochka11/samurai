@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-
+import s from './Profile.module.css';
 // type ProfilePropsType = {
 //     userName: string,
 //     avatarUrl: string,
@@ -12,7 +12,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 function Profile() {
     return (
-        <div className="profile">
+        <div className={s.profile}>
             <ProfileInfo/>
             <MyPosts/>
         </div>

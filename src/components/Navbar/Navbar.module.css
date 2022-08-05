@@ -1,0 +1,9 @@
+.navbar {}
+.navbar__container {
+    padding-right: 15px
+}
+
+.navbar__item {
+    display: flex;
+    flex-direction: column;
+}

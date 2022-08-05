@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Header.module.css'
 
 type HeaderPropsType = {
     headerLogo: string,
@@ -7,9 +8,9 @@ type HeaderPropsType = {
 function Header(props:HeaderPropsType) {
 
     return (
-        <div className="header">
-            <div className="header__row">
-                <img src={props.headerLogo} alt="" className="header__logo"/>
+        <div className={s.header}>
+            <div className={s.header__row}>
+                <img src={props.headerLogo} alt="" className={s.header__logo}/>
             </div>
         </div>
     )
