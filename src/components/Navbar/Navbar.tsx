@@ -19,6 +19,7 @@ function Navbar() {
                     <li><Link to="/dialogs">Dialogs</Link></li>
                     <li><Link to="/news">News</Link></li>
                     <li><Link to="/music">Music</Link></li>
+                    <li><Link to="/friends">Friends</Link></li>
                     <li><Link to="/settings">Settings</Link></li>
                 </ul>
             </div>

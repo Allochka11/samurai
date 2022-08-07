@@ -3,33 +3,25 @@ import {Message} from "./Message/Message";
 
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
+import {DialogsPropsType, MessagesPropsType} from "../../App";
 
-type DialogsPropsType = {
-    // userName: string,
-    // avatarUrl: string,
-    // profileHeaderImg: string
+type DialogsProps = {
+    dialogs: DialogsPropsType[]
+    messages: MessagesPropsType[]
+}
+
+type DialogsStatePropsType = {
+    state: DialogsProps
 }
 
 
-export const Dialogs = () => {
-    let dialogs = [
-        {id: 1, name: 'Alla'},
-        {id: 2, name: 'Ann'},
-        {id: 3, name: 'Oll'},
-        {id: 4, name: 'All'},
-        {id: 5, name: 'Nick'},
-    ];
-    let messages = [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'How'},
-        {id: 3, message: 'Are'},
-        {id: 4, message: 'You?'},
-        {id: 5, message: '!!!'},
-    ];
+export const Dialogs = (props: DialogsStatePropsType) => {
 
-    let dialogsElements = dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>
+
+    let dialogsElements = props.state.dialogs.map((el) => <DialogItem key={el.id} name={el.name} id={el.id}/>
     );
-    let messagesElements = messages.map((el) => <Message key={el.id} message={el.message} id={el.id}/>)
+
+    let messagesElements = props.state.messages.map((el) => <Message key={el.id} message={el.message} id={el.id}/>)
 
 
     return (

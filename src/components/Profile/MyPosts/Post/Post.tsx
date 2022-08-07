@@ -1,11 +1,10 @@
 import React from 'react';
 import s from './Post.module.css'
-import {PostDataPropsType} from "../MyPosts";
+import {PostDataPropsType} from "../../../../App";
 
 
 function Post(props: PostDataPropsType) {
-
-    // console.log(props)
+    // console.log(props, 'Post')
 
     return (
         <div className={s.posts__items} key={props.id}>

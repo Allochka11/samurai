@@ -2,24 +2,25 @@ import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
-// type ProfilePropsType = {
-//     userName: string,
-//     avatarUrl: string,
-//     profileHeaderImg: string
-// }
+import {PostDataPropsType} from "../../App";
 
 
-function Profile() {
+type ProfilePropsType = {
+    postData: PostDataPropsType[]
+}
 
-    let postData = [
-        {id: 1, message: 'Hi, how are you?', likesCount: 11},
-        {id: 2, message: 'It\'s my first post', likesCount: 12},
-    ];
+type StateProfilePropsType = {
+    state: ProfilePropsType
+}
+
+
+function Profile(props: StateProfilePropsType) {
+    console.log(props, 'Profile')
 
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPosts postData={postData}/>
+            <MyPosts postData={props.state.postData}/>
         </div>
     )
 }

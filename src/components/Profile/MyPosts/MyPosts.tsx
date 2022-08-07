@@ -2,19 +2,16 @@ import React from 'react';
 import Post from "./Post/Post";
 
 import s from './MyPosts.module.css'
+import {PostDataPropsType} from "../../../App";
 
 
-export type PostDataPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-type MyPostsPropsType = {
+type MyPostsType = {
     postData: PostDataPropsType[]
+
 }
 
-function MyPosts(props: MyPostsPropsType) {
+function MyPosts(props: MyPostsType) {
+    // console.log(props, 'MyPosts')
 
 
     let postsElements = props.postData.map((el) => <Post key={el.id} id={el.id} message={el.message}
@@ -26,8 +23,6 @@ function MyPosts(props: MyPostsPropsType) {
                 <div>
                     <button>Send</button>
                 </div>
-
-
                 <h3>Posts:</h3>
                 {postsElements}
             </div>

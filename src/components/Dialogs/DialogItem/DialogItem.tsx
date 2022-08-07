@@ -8,6 +8,7 @@ type DialogItemPropsType = {
 }
 
 export const DialogItem = (props: DialogItemPropsType) => {
+    // console.log(props, 'DialogItem')
     let path = `/dialogs/${props.id}`;
     return (
         <div>
