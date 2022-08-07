@@ -9,12 +9,17 @@ import s from './Profile.module.css';
 // }
 
 
-
 function Profile() {
+
+    let postData = [
+        {id: 1, message: 'Hi, how are you?', likesCount: 11},
+        {id: 2, message: 'It\'s my first post', likesCount: 12},
+    ];
+
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts postData={postData}/>
         </div>
     )
 }

@@ -3,14 +3,22 @@ import Post from "./Post/Post";
 
 import s from './MyPosts.module.css'
 
+
+export type PostDataPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
 type MyPostsPropsType = {
-    // userName: string,
-    // avatarUrl: string,
-    // profileHeaderImg: string
+    postData: PostDataPropsType[]
 }
 
 function MyPosts(props: MyPostsPropsType) {
 
+
+    let postsElements = props.postData.map((el) => <Post key={el.id} id={el.id} message={el.message}
+                                                         likesCount={el.likesCount}/>)
     return (
         <div className={s.posts}>
             <div className={s.posts__container}>
@@ -21,8 +29,7 @@ function MyPosts(props: MyPostsPropsType) {
 
 
                 <h3>Posts:</h3>
-                <Post message={"Hi, how are you?"} likeCount={15}/>
-                <Post message={"It's my first post"} likeCount={20}/>
+                {postsElements}
             </div>
         </div>
     )
