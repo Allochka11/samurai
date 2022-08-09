@@ -1,5 +1,5 @@
 import React from "react";
-import {FriendPropsType} from "../../App";
+import {FriendPropsType} from "../../redux/state";
 import {Friend} from "./Friend/Friend";
 
 

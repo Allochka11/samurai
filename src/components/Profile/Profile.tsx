@@ -2,7 +2,7 @@ import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
-import {PostDataPropsType} from "../../App";
+import {PostDataPropsType} from "../../redux/state";
 
 
 type ProfilePropsType = {
@@ -11,16 +11,16 @@ type ProfilePropsType = {
 
 type StateProfilePropsType = {
     state: ProfilePropsType
+    addPost: (message: string) => void
 }
 
 
 function Profile(props: StateProfilePropsType) {
-    console.log(props, 'Profile')
 
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPosts postData={props.state.postData}/>
+            <MyPosts postData={props.state.postData} addPost={props.addPost}/>
         </div>
     )
 }

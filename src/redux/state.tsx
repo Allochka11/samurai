@@ -1,4 +1,46 @@
-export let state = {
+import {renderEntireState} from "../renderEntireState";
+
+export type MessagesPropsType = {
+    id: number
+    message: string
+}
+
+export type DialogsPropsType = {
+    id: number
+    name: string
+}
+
+export type PostDataPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+export type FriendPropsType = {
+    id: number
+    name: string
+}
+
+export type MessagesPagePropsType = {
+    dialogs: DialogsPropsType[]
+    messages: MessagesPropsType[]
+}
+export type ProfilePagePropsType = {
+    postData: PostDataPropsType[]
+}
+
+export type SidebarPagePropsType = {
+    friends: FriendPropsType[]
+}
+
+export type StatePropsType = {
+    messagesPage: MessagesPagePropsType
+    profilePage: ProfilePagePropsType
+    sidebar: SidebarPagePropsType
+}
+
+
+export let state: StatePropsType = {
+
     messagesPage: {
         dialogs: [
             {id: 1, name: 'Alla'},
@@ -30,5 +72,11 @@ export let state = {
             {id: 3, name: 'Ivan'},
         ]
     }
+}
+
+export const addPost = (message: string) => {
+    let newPostMessage: PostDataPropsType = {id: new Date().getTime(), message: message, likesCount: 11};
+    state.profilePage.postData.push(newPostMessage);
+    renderEntireState(state);
 
 }

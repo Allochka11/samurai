@@ -5,58 +5,61 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {
-    Routes,
-    Route
-} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
+import {StatePropsType} from "./redux/state";
 
 
-export type MessagesPropsType = {
-    id: number
-    message: string
-}
+// export type MessagesPropsType = {
+//     id: number
+//     message: string
+// }
+//
+// export type DialogsPropsType = {
+//     id: number
+//     name: string
+// }
+//
+// export type PostDataPropsType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
+// export type FriendPropsType = {
+//     id: number
+//     name: string
+// }
+//
+// export type MessagesPagePropsType = {
+//     dialogs: DialogsPropsType[]
+//     messages: MessagesPropsType[]
+// }
+// export type ProfilePagePropsType = {
+//     postData: PostDataPropsType[]
+// }
+//
+// export type SidebarPagePropsType = {
+//     friends: FriendPropsType[]
+// }
+//
+// export type StatePropsType = {
+//     messagesPage: MessagesPagePropsType
+//     profilePage: ProfilePagePropsType
+//     sidebar: SidebarPagePropsType
+// }
+//
+// export type StateType = {
+//     state: StatePropsType
+// }
 
-export type DialogsPropsType = {
-    id: number
-    name: string
-}
-
-export type PostDataPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-export type FriendPropsType = {
-    id: number
-    name: string
-}
-
-export type MessagesPagePropsType = {
-    dialogs: DialogsPropsType[]
-    messages: MessagesPropsType[]
-}
-export type ProfilePagePropsType = {
-    postData: PostDataPropsType[]
-}
-
-export type SidebarPagePropsType = {
-    friends: FriendPropsType[]
-}
-
-export type StatePropsType = {
-    messagesPage: MessagesPagePropsType
-    profilePage: ProfilePagePropsType
-    sidebar: SidebarPagePropsType
-}
-
-export type StateType = {
+type AppPropsType = {
     state: StatePropsType
+    addPost: (message: string) => void
 }
 
 
-function App(props: StateType) {
-    console.log(props.state.sidebar.friends, 'App')
+function App(props: AppPropsType) {
+    // console.log(props.state.sidebar.friends, 'App')
     return (
         <div className={s.wrapper}>
             <div className={s.wrapper__container}>
@@ -73,7 +76,7 @@ function App(props: StateType) {
                                        element={<Dialogs state={props.state.messagesPage}
                                        />}/>
                                 <Route path="/profile"
-                                       element={<Profile state={props.state.profilePage}/>}/>
+                                       element={<Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
                                 <Route path="/friends"
                                        element={<Friends state={props.state.sidebar}/>}/>
                             </Routes>
