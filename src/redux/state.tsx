@@ -26,6 +26,8 @@ export type MessagesPagePropsType = {
 }
 export type ProfilePagePropsType = {
     postData: PostDataPropsType[]
+    newPostText: string
+
 }
 
 export type SidebarPagePropsType = {
@@ -38,6 +40,27 @@ export type StatePropsType = {
     sidebar: SidebarPagePropsType
 }
 
+export type ProfilePropsType = {
+    postData: PostDataPropsType[]
+    newPostText: string
+}
+
+export type StateProfilePropsType = {
+    profilePage: ProfilePropsType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+}
+export type MyPostsType = {
+    postData: PostDataPropsType[]
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+}
+export type AppPropsType = {
+    state: StatePropsType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+}
 
 export let state: StatePropsType = {
 
@@ -62,7 +85,8 @@ export let state: StatePropsType = {
         postData: [
             {id: 1, message: 'Hi, how are you?', likesCount: 11},
             {id: 2, message: 'It\'s my first post', likesCount: 12},
-        ]
+        ],
+        newPostText: 'it_camasutra.com'
     },
 
     sidebar: {
@@ -74,9 +98,20 @@ export let state: StatePropsType = {
     }
 }
 
-export const addPost = (message: string) => {
-    let newPostMessage: PostDataPropsType = {id: new Date().getTime(), message: message, likesCount: 11};
+export const addPost = () => {
+    let newPostMessage: PostDataPropsType = {
+        id: new Date().getTime(),
+        message: state.profilePage.newPostText,
+        likesCount: 11
+    };
+    state.profilePage.newPostText = '';
     state.profilePage.postData.push(newPostMessage);
     renderEntireState(state);
-
 }
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    // state.profilePage.postData.push(newText);
+    renderEntireState(state);
+}
+
