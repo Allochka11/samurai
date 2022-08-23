@@ -17,7 +17,6 @@ function MyPosts(props: MyPostsType) {
         props.updateNewPostText(e.currentTarget.value);
     }
 
-
     return (
         <div className={s.posts}>
             <div className={s.posts__container}>

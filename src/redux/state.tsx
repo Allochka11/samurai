@@ -1,4 +1,7 @@
-import {renderEntireState} from "../renderEntireState";
+let rerenderEntireState = () => {
+    console.log('State was changed')
+}
+
 
 export type MessagesPropsType = {
     id: number
@@ -106,12 +109,15 @@ export const addPost = () => {
     };
     state.profilePage.newPostText = '';
     state.profilePage.postData.push(newPostMessage);
-    renderEntireState(state);
+    rerenderEntireState();
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     // state.profilePage.postData.push(newText);
-    renderEntireState(state);
+    rerenderEntireState();
+}
+export const subscribe = (observer: () => void) => {
+    rerenderEntireState = observer;
 }
 
