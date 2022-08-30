@@ -7,7 +7,7 @@ import Profile from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
-import {AppPropsType, StatePropsType, StoreType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type PropsType = {
     store: StoreType
@@ -15,7 +15,6 @@ type PropsType = {
 
 function App(props: PropsType) {
     const state = props.store.getState();
-
 
     return (
         <div className={s.wrapper}>
@@ -34,8 +33,7 @@ function App(props: PropsType) {
                                        />}/>
                                 <Route path="/profile"
                                        element={<Profile profilePage={state.profilePage}
-                                                         addPost={props.store.addPost.bind(props.store)}
-                                                         updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
+                                                         dispatch={props.store.dispatch.bind(props.store)}/>}/>
                                 <Route path="/friends"
                                        element={<Friends state={state.sidebar}/>}/>
                             </Routes>

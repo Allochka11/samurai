@@ -35,30 +35,37 @@ export type ProfilePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
 }
+export type DispatchType = (action: AddPostActionType | ChangeNewTextActionType) => void
 export type StateProfilePropsType = {
     profilePage: ProfilePropsType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: DispatchType
 }
 export type MyPostsType = {
     postData: PostDataPropsType[]
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: DispatchType
 }
 export type AppPropsType = {
     state: StatePropsType
     addPost: () => void
     updateNewPostText: (newText: string) => void
 }
-
 export type StoreType = {
     _state: StatePropsType
     _rerenderEntireState: (state?: StatePropsType) => void
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
     subscribe: (observer: () => void) => void
     getState: () => StatePropsType
+    dispatch: DispatchType
+}
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    newPostText?: string
+}
+
+export type ChangeNewTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
 }
 
 let store: StoreType = {
@@ -96,30 +103,35 @@ let store: StoreType = {
             ]
         }
     },
-    getState() {
-        return this._state
-    },
     _rerenderEntireState() {
         console.log('State was changed');
     },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        // state.profilePage.postData.push(newText);
-        this._rerenderEntireState(this._state);
-    },
-    addPost() {
-        let newPostMessage: PostDataPropsType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 11
-        };
-        this._state.profilePage.newPostText = '';
-        this._state.profilePage.postData.push(newPostMessage);
-        this._rerenderEntireState(this._state);
+
+    getState() {
+        return this._state
     },
     subscribe(observer: () => void) {
         this._rerenderEntireState = observer;
+
+    },
+
+    dispatch(action) {
+        // debugger
+        if (action.type === 'ADD-POST') {
+            let newPostMessage: PostDataPropsType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 11
+            };
+            this._state.profilePage.newPostText = '';
+            this._state.profilePage.postData.push(newPostMessage);
+            this._rerenderEntireState(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._rerenderEntireState(this._state);
+        }
     }
+
 }
 export default store;
 
