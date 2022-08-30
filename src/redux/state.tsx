@@ -1,18 +1,11 @@
-let rerenderEntireState = () => {
-    console.log('State was changed')
-}
-
-
 export type MessagesPropsType = {
     id: number
     message: string
 }
-
 export type DialogsPropsType = {
     id: number
     name: string
 }
-
 export type PostDataPropsType = {
     id: number
     message: string
@@ -22,7 +15,6 @@ export type FriendPropsType = {
     id: number
     name: string
 }
-
 export type MessagesPagePropsType = {
     dialogs: DialogsPropsType[]
     messages: MessagesPropsType[]
@@ -30,24 +22,19 @@ export type MessagesPagePropsType = {
 export type ProfilePagePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
-
 }
-
 export type SidebarPagePropsType = {
     friends: FriendPropsType[]
 }
-
 export type StatePropsType = {
     messagesPage: MessagesPagePropsType
     profilePage: ProfilePagePropsType
     sidebar: SidebarPagePropsType
 }
-
 export type ProfilePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
 }
-
 export type StateProfilePropsType = {
     profilePage: ProfilePropsType
     addPost: () => void
@@ -65,59 +52,74 @@ export type AppPropsType = {
     updateNewPostText: (newText: string) => void
 }
 
-export let state: StatePropsType = {
+export type StoreType = {
+    _state: StatePropsType
+    _rerenderEntireState: (state?: StatePropsType) => void
+    updateNewPostText: (newText: string) => void
+    addPost: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => StatePropsType
+}
 
-    messagesPage: {
-        dialogs: [
-            {id: 1, name: 'Alla'},
-            {id: 2, name: 'Ann'},
-            {id: 3, name: 'Oll'},
-            {id: 4, name: 'All'},
-            {id: 5, name: 'Nick'},
-        ],
-        messages: [
-            {id: 1, message: 'Hello'},
-            {id: 2, message: 'How'},
-            {id: 3, message: 'Are'},
-            {id: 4, message: 'You?'},
-            {id: 5, message: '!!!'},
-        ]
+let store: StoreType = {
+    _state: {
+        messagesPage: {
+            dialogs: [
+                {id: 1, name: 'Alla'},
+                {id: 2, name: 'Ann'},
+                {id: 3, name: 'Oll'},
+                {id: 4, name: 'All'},
+                {id: 5, name: 'Nick'},
+            ],
+            messages: [
+                {id: 1, message: 'Hello'},
+                {id: 2, message: 'How'},
+                {id: 3, message: 'Are'},
+                {id: 4, message: 'You?'},
+                {id: 5, message: '!!!'},
+            ]
+        },
+
+        profilePage: {
+            postData: [
+                {id: 1, message: 'Hi, how are you?', likesCount: 11},
+                {id: 2, message: 'It\'s my first post', likesCount: 12},
+            ],
+            newPostText: 'it_camasutra.com'
+        },
+
+        sidebar: {
+            friends: [
+                {id: 1, name: 'Sasha'},
+                {id: 2, name: 'Petya'},
+                {id: 3, name: 'Ivan'},
+            ]
+        }
     },
-
-    profilePage: {
-        postData: [
-            {id: 1, message: 'Hi, how are you?', likesCount: 11},
-            {id: 2, message: 'It\'s my first post', likesCount: 12},
-        ],
-        newPostText: 'it_camasutra.com'
+    getState() {
+        return this._state
     },
-
-    sidebar: {
-        friends: [
-            {id: 1, name: 'Sasha'},
-            {id: 2, name: 'Petya'},
-            {id: 3, name: 'Ivan'},
-        ]
+    _rerenderEntireState() {
+        console.log('State was changed');
+    },
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText;
+        // state.profilePage.postData.push(newText);
+        this._rerenderEntireState(this._state);
+    },
+    addPost() {
+        let newPostMessage: PostDataPropsType = {
+            id: new Date().getTime(),
+            message: this._state.profilePage.newPostText,
+            likesCount: 11
+        };
+        this._state.profilePage.newPostText = '';
+        this._state.profilePage.postData.push(newPostMessage);
+        this._rerenderEntireState(this._state);
+    },
+    subscribe(observer: () => void) {
+        this._rerenderEntireState = observer;
     }
 }
-
-export const addPost = () => {
-    let newPostMessage: PostDataPropsType = {
-        id: new Date().getTime(),
-        message: state.profilePage.newPostText,
-        likesCount: 11
-    };
-    state.profilePage.newPostText = '';
-    state.profilePage.postData.push(newPostMessage);
-    rerenderEntireState();
-}
-
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText;
-    // state.profilePage.postData.push(newText);
-    rerenderEntireState();
-}
-export const subscribe = (observer: () => void) => {
-    rerenderEntireState = observer;
-}
+export default store;
 
