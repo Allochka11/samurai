@@ -1,3 +1,7 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
+
 export type MessagesPropsType = {
     id: number
     message: string
@@ -35,15 +39,15 @@ export type ProfilePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
 }
-export type DispatchType = (action: AddPostActionType | ChangeNewTextActionType) => void
+
 export type StateProfilePropsType = {
     profilePage: ProfilePropsType
-    dispatch: DispatchType
+    dispatch: (action: ActionsTypes) => void
 }
 export type MyPostsType = {
     postData: PostDataPropsType[]
     newPostText: string
-    dispatch: DispatchType
+    dispatch: (action: ActionsTypes) => void
 }
 export type AppPropsType = {
     state: StatePropsType
@@ -55,18 +59,16 @@ export type StoreType = {
     _rerenderEntireState: (state?: StatePropsType) => void
     subscribe: (observer: () => void) => void
     getState: () => StatePropsType
-    dispatch: DispatchType
+    dispatch: (action: ActionsTypes) => void
 }
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof onPostChangeActionCreator>
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-    newPostText?: string
-}
+export let addPostActionCreator = () => ({type: ADD_POST}) as const
+export let onPostChangeActionCreator = (newText: string) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: newText
+}) as const
 
-export type ChangeNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
 
 let store: StoreType = {
     _state: {
@@ -117,7 +119,7 @@ let store: StoreType = {
 
     dispatch(action) {
         // debugger
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPostMessage: PostDataPropsType = {
                 id: new Date().getTime(),
                 message: this._state.profilePage.newPostText,
@@ -126,7 +128,7 @@ let store: StoreType = {
             this._state.profilePage.newPostText = '';
             this._state.profilePage.postData.push(newPostMessage);
             this._rerenderEntireState(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._rerenderEntireState(this._state);
         }
