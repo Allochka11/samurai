@@ -1,6 +1,6 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
+import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from "./profile-reducer";
+import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export type MessagesPropsType = {
     id: number
@@ -9,6 +9,16 @@ export type MessagesPropsType = {
 export type DialogsPropsType = {
     id: number
     name: string
+}
+export type DialogsProps = {
+    dialogs: DialogsPropsType[]
+    messages: MessagesPropsType[]
+    newMessageBody: string
+
+}
+export type DialogsStatePropsType = {
+    state: DialogsProps
+    dispatch: (action: ActionsTypes) => void
 }
 export type PostDataPropsType = {
     id: number
@@ -22,6 +32,7 @@ export type FriendPropsType = {
 export type MessagesPagePropsType = {
     dialogs: DialogsPropsType[]
     messages: MessagesPropsType[]
+    newMessageBody: string
 }
 export type ProfilePagePropsType = {
     postData: PostDataPropsType[]
@@ -39,7 +50,6 @@ export type ProfilePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
 }
-
 export type StateProfilePropsType = {
     profilePage: ProfilePropsType
     dispatch: (action: ActionsTypes) => void
@@ -49,11 +59,6 @@ export type MyPostsType = {
     newPostText: string
     dispatch: (action: ActionsTypes) => void
 }
-export type AppPropsType = {
-    state: StatePropsType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-}
 export type StoreType = {
     _state: StatePropsType
     _rerenderEntireState: (state?: StatePropsType) => void
@@ -61,13 +66,10 @@ export type StoreType = {
     getState: () => StatePropsType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof onPostChangeActionCreator>
-
-export let addPostActionCreator = () => ({type: ADD_POST}) as const
-export let onPostChangeActionCreator = (newText: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newText
-}) as const
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof onPostChangeActionCreator> |
+    ReturnType<typeof sendMessageActionCreator> |
+    ReturnType<typeof updateNewMessageBodyActionCreator>
 
 
 let store: StoreType = {
@@ -86,7 +88,9 @@ let store: StoreType = {
                 {id: 3, message: 'Are'},
                 {id: 4, message: 'You?'},
                 {id: 5, message: '!!!'},
-            ]
+            ],
+            newMessageBody: ''
+
         },
 
         profilePage: {
@@ -118,20 +122,10 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        // debugger
-        if (action.type === ADD_POST) {
-            let newPostMessage: PostDataPropsType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 11
-            };
-            this._state.profilePage.newPostText = '';
-            this._state.profilePage.postData.push(newPostMessage);
-            this._rerenderEntireState(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._rerenderEntireState(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = messageReducer(this._state.messagesPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._rerenderEntireState(this._state);
     }
 
 }

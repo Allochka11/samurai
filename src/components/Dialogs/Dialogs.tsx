@@ -1,18 +1,9 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {Message} from "./Message/Message";
-
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsPropsType, MessagesPropsType} from "../../redux/state";
-
-type DialogsProps = {
-    dialogs: DialogsPropsType[]
-    messages: MessagesPropsType[]
-}
-
-type DialogsStatePropsType = {
-    state: DialogsProps
-}
+import {DialogsStatePropsType} from "../../redux/state";
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/message-reducer";
 
 
 export const Dialogs = (props: DialogsStatePropsType) => {
@@ -23,10 +14,16 @@ export const Dialogs = (props: DialogsStatePropsType) => {
 
     let messagesElements = props.state.messages.map((el) => <Message key={el.id} message={el.message} id={el.id}/>)
     let newMessage = React.createRef<HTMLTextAreaElement>();
+    let newMessageBody = props.state.newMessageBody
 
-    const sendMessage = () => {
-        const text = newMessage.current?.value;
-        alert(text)
+    console.log(props.state.newMessageBody)
+
+    const onSendMessageClick = () => {
+        props.dispatch(sendMessageActionCreator());
+    }
+    let onNewMessageChange = (el: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = el.target.value;
+        props.dispatch(updateNewMessageBodyActionCreator(body))
     }
 
     return (
@@ -36,26 +33,21 @@ export const Dialogs = (props: DialogsStatePropsType) => {
                     {dialogsElements}
                 </div>
                 <div>
-                    {messagesElements}
+                    <div>{messagesElements}</div>
+                    <div className={s.send}>
+                        <div><textarea name="" value={newMessageBody}
+                                       onChange={onNewMessageChange}
+                                       placeholder={'Enter your message'}></textarea>
+                        </div>
+                        <div>
+                            <button onClick={onSendMessageClick}>send</button>
+                        </div>
+                    </div>
                 </div>
 
-
-                {/*<div className="profile__header">*/}
-                {/*    <img src={props.profileHeaderImg} alt="avatar header"/>*/}
-                {/*</div>*/}
-                {/*<div className="profile__main">*/}
-                {/*    <img src={props.avatarUrl} alt="avatar" className="profile__avatar"/>*/}
-                {/*    <div className="profile__name">{props.userName}</div>*/}
-                {/*</div>*/}
-                {/*<MyPosts />*/}
-            </div>
-            <div className={s.send}>
-                <textarea name="" ref={newMessage}></textarea>
-                <button onClick={sendMessage}>send</button>
             </div>
 
         </div>
-
     )
 }
 

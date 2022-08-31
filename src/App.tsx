@@ -30,6 +30,7 @@ function App(props: PropsType) {
                             <Routes>
                                 <Route path="/dialogs/*"
                                        element={<Dialogs state={state.messagesPage}
+                                                         dispatch={props.store.dispatch.bind(props.store)}
                                        />}/>
                                 <Route path="/profile"
                                        element={<Profile profilePage={state.profilePage}
