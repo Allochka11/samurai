@@ -18,7 +18,7 @@ export type DialogsProps = {
 }
 export type DialogsStatePropsType = {
     state: DialogsProps
-    dispatch: (action: ActionsTypes) => void
+
 }
 export type PostDataPropsType = {
     id: number
