@@ -38,6 +38,7 @@ function App(props: PropsType) {
                                 <Route path="/friends"
                                        element={<Friends state={state.sidebar}/>}/>
                             </Routes>
+                            
                             {/*<Dialogs/>*/}
                         </div>
                     </div>
