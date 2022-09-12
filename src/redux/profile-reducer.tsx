@@ -2,8 +2,14 @@ import {ActionsTypes, PostDataPropsType, ProfilePagePropsType} from "./store";
 
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
-export const profileReducer = (state: ProfilePagePropsType, action: ActionsTypes) => {
+let initialState = {
+    postData: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 11},
+        {id: 2, message: 'It\'s my first post', likesCount: 12},
+    ],
+    newPostText: 'it_camasutra.com'
+}
+export const profileReducer = (state: ProfilePagePropsType = initialState, action: ActionsTypes) => {
 
     //profilePage = state
     switch (action.type) {

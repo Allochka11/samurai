@@ -1,6 +1,7 @@
 import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from "./profile-reducer";
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import ReduxStore from "./redux-store";
 
 export type MessagesPropsType = {
     id: number
@@ -67,6 +68,12 @@ export type StoreType = {
     getState: () => StatePropsType
     dispatch: (action: ActionsTypes) => void
 }
+
+export type ReducersPropsType = {
+    profileReducer: (DialogsStatePropsType)
+    messageReducer: (MessagesPagePropsType)
+    sidebarReducer: (SidebarPagePropsType)
+}
 export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof onPostChangeActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
@@ -91,7 +98,6 @@ let store: StoreType = {
                 {id: 5, message: '!!!'},
             ],
             newMessageBody: ''
-
         },
 
         profilePage: {
@@ -123,6 +129,7 @@ let store: StoreType = {
     },
 
     dispatch(action) {
+
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.messagesPage = messageReducer(this._state.messagesPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)

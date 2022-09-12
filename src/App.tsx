@@ -7,14 +7,20 @@ import Profile from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
-import store, {StoreType} from "./redux/store";
+import store from "./redux/redux-store";
+import {DialogsStatePropsType, MessagesPagePropsType, SidebarPagePropsType, StoreType} from './redux/store';
 
 type PropsType = {
     store: StoreType
 }
 
+
 function App(props: PropsType) {
+
     let state = props.store.getState();
+    console.log(state)
+    console.log()
+
 
     return (
         <div className={s.wrapper}>

@@ -7,6 +7,7 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../..
 
 
 export const Dialogs = (props: DialogsStatePropsType) => {
+    // debugger;
 
 
     let dialogsElements = props.state.dialogs.map((el) => <DialogItem key={el.id} name={el.name} id={el.id}/>

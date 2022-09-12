@@ -1,13 +1,13 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {StatePropsType, StoreType} from "./redux/store";
-import store from "./redux/store";
+import {StatePropsType} from "./redux/store";
+import store from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
-export let rerenderEntireState = (state?: StoreType) => {
+export let rerenderEntireState = (state?: StatePropsType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App store={store}/>
@@ -16,7 +16,7 @@ export let rerenderEntireState = (state?: StoreType) => {
     );
 };
 
-rerenderEntireState();
+rerenderEntireState(store.getState());
 
 store.subscribe(rerenderEntireState)
 
