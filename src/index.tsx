@@ -1,21 +1,22 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {StatePropsType, StoreType} from "./redux/state";
-import store from "./redux/state";
+import {StatePropsType, StoreType} from "./redux/store";
+import store from "./redux/store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
-export let rerenderEntireState = (state?: StatePropsType) => {
+export let rerenderEntireState = (state?: StoreType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <App store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
 };
-rerenderEntireState(store.getState());
+
+rerenderEntireState();
 
 store.subscribe(rerenderEntireState)
 

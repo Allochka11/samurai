@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {Message} from "./Message/Message";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsStatePropsType} from "../../redux/state";
+import {DialogsStatePropsType} from "../../redux/store";
 import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/message-reducer";
 
 
@@ -16,7 +16,7 @@ export const Dialogs = (props: DialogsStatePropsType) => {
     let newMessage = React.createRef<HTMLTextAreaElement>();
     let newMessageBody = props.state.newMessageBody
 
-    console.log(props.state.newMessageBody)
+    // console.log(props.state.newMessageBody)
 
     const onSendMessageClick = () => {
         props.dispatch(sendMessageActionCreator());

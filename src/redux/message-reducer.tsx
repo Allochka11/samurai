@@ -1,4 +1,4 @@
-import {ActionsTypes, MessagesPagePropsType} from "./state";
+import {ActionsTypes, MessagesPagePropsType} from "./store";
 
 export const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 export const SEND_MESSAGE = "SEND-MESSAGE";
