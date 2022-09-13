@@ -7,7 +7,6 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../..
 
 
 export const Dialogs = (props: DialogsStatePropsType) => {
-    // debugger;
 
 
     let dialogsElements = props.state.dialogs.map((el) => <DialogItem key={el.id} name={el.name} id={el.id}/>
@@ -17,7 +16,7 @@ export const Dialogs = (props: DialogsStatePropsType) => {
     let newMessage = React.createRef<HTMLTextAreaElement>();
     let newMessageBody = props.state.newMessageBody
 
-    // console.log(props.state.newMessageBody)
+    console.log(props.state.newMessageBody)
 
     const onSendMessageClick = () => {
         props.dispatch(sendMessageActionCreator());

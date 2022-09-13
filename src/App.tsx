@@ -7,20 +7,16 @@ import Profile from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
-import store from "./redux/redux-store";
-import {DialogsStatePropsType, MessagesPagePropsType, SidebarPagePropsType, StoreType} from './redux/store';
+import {AppStoreType} from "./redux/redux-store";
 
 type PropsType = {
-    store: StoreType
+    store: AppStoreType
 }
 
 
 function App(props: PropsType) {
 
     let state = props.store.getState();
-    console.log(state)
-    console.log()
-
 
     return (
         <div className={s.wrapper}>
@@ -35,16 +31,16 @@ function App(props: PropsType) {
                         <div className={s.content__right}>
                             <Routes>
                                 <Route path="/dialogs/*"
-                                       element={<Dialogs state={state.messagesPage}
+                                       element={<Dialogs state={state.messageReducer}
                                                          dispatch={props.store.dispatch.bind(props.store)}
                                        />
 
                                        }/>
                                 <Route path="/profile"
-                                       element={<Profile profilePage={state.profilePage}
+                                       element={<Profile profilePage={state.profileReducer}
                                                          dispatch={props.store.dispatch.bind(props.store)}/>}/>
                                 <Route path="/friends"
-                                       element={<Friends state={state.sidebar}/>}/>
+                                       element={<Friends state={state.sidebarReducer}/>}/>
                             </Routes>
 
                             {/*<Dialogs/>*/}

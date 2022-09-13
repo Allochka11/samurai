@@ -69,10 +69,19 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+export type ReducersStoreType = {
+    _state: ReducersPropsType
+    _rerenderEntireState: (state?: StatePropsType) => void
+    subscribe: (observer: () => void) => void
+    getState: () => StatePropsType
+    dispatch: (action: ActionsTypes) => void
+}
+
 export type ReducersPropsType = {
     profileReducer: (DialogsStatePropsType)
     messageReducer: (MessagesPagePropsType)
     sidebarReducer: (SidebarPagePropsType)
+    dispatch: (action: ActionsTypes) => void
 }
 export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof onPostChangeActionCreator> |
@@ -129,13 +138,11 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.messagesPage = messageReducer(this._state.messagesPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._rerenderEntireState(this._state);
     }
-
 }
 export default store;
 
