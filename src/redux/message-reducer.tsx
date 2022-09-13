@@ -22,7 +22,7 @@ let initialState = {
 }
 
 export const messageReducer = (state: MessagesPagePropsType = initialState, action: ActionsTypes) => {
-    console.log(state)
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body;

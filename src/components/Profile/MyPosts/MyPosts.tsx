@@ -1,32 +1,40 @@
 import React, {ChangeEvent} from 'react';
 import Post from "./Post/Post";
-
 import s from './MyPosts.module.css'
-import {MyPostsType} from "../../../redux/store";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../../redux/profile-reducer";
+import {PostDataPropsType} from "../../../redux/store";
 
+type MyPostsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+    postData: PostDataPropsType[]
+    newPostText: string
+}
 
 function MyPosts(props: MyPostsType) {
 
     let postsElements = props.postData.map((el) => <Post key={el.id} id={el.id} message={el.message}
                                                          likesCount={el.likesCount}/>)
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator());
+    const onAddPost = () => {
+        props.addPost();
+        // props.dispatch(addPostActionCreator());
     };
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newText = e.currentTarget.value;
-        props.dispatch(onPostChangeActionCreator(newText));
+        let text = e.currentTarget.value;
+        props.updateNewPostText(text);
+        // props.updateNewPostText(newText)
+        // props.dispatch(onPostChangeActionCreator(newText));
 
     }
-
+    // value={props.newPostText}
     return (
         <div className={s.posts}>
             <div className={s.posts__container}>
                 <div><textarea name="post" onChange={onPostChange}
-                               placeholder={'Write your message...'} value={props.newPostText}></textarea></div>
+                               placeholder={'Write your message...'}
+                               value={props.newPostText}></textarea></div>
                 <div>
-                    <button onClick={addPost}>Send</button>
+                    <button onClick={onAddPost}>Send</button>
                 </div>
                 <h3>Posts:</h3>
                 {postsElements}

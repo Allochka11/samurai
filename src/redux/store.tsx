@@ -1,7 +1,7 @@
 import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from "./profile-reducer";
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
-import ReduxStore from "./redux-store";
+import {AppStoreType} from "./redux-store";
 
 export type MessagesPropsType = {
     id: number
@@ -17,10 +17,12 @@ export type DialogsProps = {
     newMessageBody: string
 
 }
-export type DialogsStatePropsType = {
-    state: DialogsProps
-    dispatch: (action: ActionsTypes) => void
+export type DialogsStorePropsType = {
+    store: AppStoreType
+}
 
+export type ProfileStorePropsType = {
+    store: AppStoreType
 }
 export type PostDataPropsType = {
     id: number
@@ -78,7 +80,7 @@ export type ReducersStoreType = {
 }
 
 export type ReducersPropsType = {
-    profileReducer: (DialogsStatePropsType)
+    profileReducer: (DialogsStorePropsType)
     messageReducer: (MessagesPagePropsType)
     sidebarReducer: (SidebarPagePropsType)
     dispatch: (action: ActionsTypes) => void

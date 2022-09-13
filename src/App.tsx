@@ -4,19 +4,16 @@ import s from './App.module.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
 import {AppStoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type PropsType = {
     store: AppStoreType
 }
 
-
 function App(props: PropsType) {
-
-    let state = props.store.getState();
 
     return (
         <div className={s.wrapper}>
@@ -31,16 +28,13 @@ function App(props: PropsType) {
                         <div className={s.content__right}>
                             <Routes>
                                 <Route path="/dialogs/*"
-                                       element={<Dialogs state={state.messageReducer}
-                                                         dispatch={props.store.dispatch.bind(props.store)}
-                                       />
+                                       element={<DialogsContainer store={props.store}/>
 
                                        }/>
                                 <Route path="/profile"
-                                       element={<Profile profilePage={state.profileReducer}
-                                                         dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                                       element={<Profile store={props.store}/>}/>
                                 <Route path="/friends"
-                                       element={<Friends state={state.sidebarReducer}/>}/>
+                                       element={<Friends store={props.store}/>}/>
                             </Routes>
 
                             {/*<Dialogs/>*/}
