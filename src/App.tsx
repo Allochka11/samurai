@@ -5,15 +5,13 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
-import {Friends} from "./components/Friends/Friends";
-import {AppStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type PropsType = {
-    store: AppStoreType
-}
+// type PropsType = {
+//     store: AppStoreType
+// }
 
-function App(props: PropsType) {
+function App() {
 
     return (
         <div className={s.wrapper}>
@@ -28,13 +26,13 @@ function App(props: PropsType) {
                         <div className={s.content__right}>
                             <Routes>
                                 <Route path="/dialogs/*"
-                                       element={<DialogsContainer store={props.store}/>
+                                       element={<DialogsContainer/>
 
                                        }/>
                                 <Route path="/profile"
-                                       element={<Profile store={props.store}/>}/>
-                                <Route path="/friends"
-                                       element={<Friends store={props.store}/>}/>
+                                       element={<Profile/>}/>
+                                {/*<Route path="/friends"*/}
+                                {/*       element={<Friends/>}/>*/}
                             </Routes>
 
                             {/*<Dialogs/>*/}

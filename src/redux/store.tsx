@@ -29,9 +29,15 @@ export type PostDataPropsType = {
     message: string
     likesCount: number
 }
+
+
 export type FriendPropsType = {
     id: number
     name: string
+}
+
+export type FriendStateType = {
+    state: FriendPropsType[]
 }
 export type MessagesPagePropsType = {
     dialogs: DialogsPropsType[]

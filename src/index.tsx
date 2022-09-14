@@ -5,11 +5,15 @@ import store, {AppRootStateType} from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
+import {Provider} from "./StoreContext";
 
 export let rerenderEntireState = (state?: AppRootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store}/>
+            {/* eslint-disable-next-line react/jsx-no-undef */}
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

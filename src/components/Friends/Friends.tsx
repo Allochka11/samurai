@@ -15,7 +15,6 @@ export const Friends = (props: StateFriendsPropsType) => {
     return (
         <div>
             {friends}
-
         </div>
     );
 };
