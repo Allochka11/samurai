@@ -3,11 +3,11 @@ import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCrea
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
 
-export type MessagesPropsType = {
+type MessagesPropsType = {
     id: number
     message: string
 }
-export type DialogsPropsType = {
+type DialogsPropsType = {
     id: number
     name: string
 }
@@ -24,7 +24,7 @@ export type DialogsStorePropsType = {
 export type ProfileStorePropsType = {
     store: AppStoreType
 }
-export type PostDataPropsType = {
+type PostDataPropsType = {
     id: number
     message: string
     likesCount: number
@@ -39,12 +39,12 @@ export type FriendPropsType = {
 export type FriendStateType = {
     state: FriendPropsType[]
 }
-export type MessagesPagePropsType = {
+type MessagesPagePropsType = {
     dialogs: DialogsPropsType[]
     messages: MessagesPropsType[]
     newMessageBody: string
 }
-export type ProfilePagePropsType = {
+type ProfilePagePropsType = {
     postData: PostDataPropsType[]
     newPostText: string
 }

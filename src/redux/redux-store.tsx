@@ -4,16 +4,17 @@ import {profileReducer} from "./profile-reducer";
 import {messageReducer} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profileReducer: profileReducer,
     messageReducer: messageReducer,
     sidebarReducer: sidebarReducer
 });
 
 
-let store = createStore(reducers);
+let store = createStore(rootReducer);
+// window.store = store
 
 export type AppStoreType = typeof store;
-export type AppRootStateType = ReturnType<typeof reducers>
+export type AppRootStateType = ReturnType<typeof rootReducer>
 
 export default store;

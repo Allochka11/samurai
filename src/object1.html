@@ -1,0 +1,31 @@
+<script>
+    var a = {
+        name: 'it-camasutra',
+        protocol: 'https',
+        maxStudentsCount: 10,
+        isOnline: true,
+        students: ['ivan', 'petya', 'vasia'],
+        classroom: {
+            teacher: {
+                name: 'Irina',
+                age: 40
+            }
+        }
+    }
+    let b = {
+        ...a,
+        classroom: {teacher: {name: a.classroom.teacher.name}},
+        students: ['No']
+    };
+
+    b.classroom.teacher.name = 'Alla';
+    b.students.push('Anna', 'Maria');
+    let bNew = {...b, students: [...b.students]}
+    let last = bNew.students.pop()
+    b.name = 'it'
+
+
+    console.log('a', a)
+    console.log('b', b)
+    console.log(last)
+</script>

@@ -2,15 +2,10 @@ import React, {ChangeEvent} from 'react';
 import {Message} from "./Message/Message";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsProps} from "../../redux/store";
+import {DialogsPropsTypes} from "./DialogsContainer";
 
-type DialogsType = {
-    updateNewMessageBody: (body: string) => void
-    sendMessage: () => void
-    dialogsPage: DialogsProps
-}
-
-export const Dialogs = (props: DialogsType) => {
+export const Dialogs = (props: DialogsPropsTypes) => {
+    // console.log(props)
 
     let state = props.dialogsPage
 
@@ -54,5 +49,3 @@ export const Dialogs = (props: DialogsType) => {
         </div>
     )
 }
-
-// export default Dialogs;

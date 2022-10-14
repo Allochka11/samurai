@@ -1,9 +1,24 @@
-import {ActionsTypes, MessagesPagePropsType} from "./store";
+import {ActionsTypes} from "./store";
 
 export const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 export const SEND_MESSAGE = "SEND-MESSAGE";
 
-let initialState = {
+type DialogsPropsType = {
+    id: number
+    name: string
+}
+type MessagesPropsType = {
+    id: number
+    message: string
+}
+
+export type MessagesPagePropsType = {
+    dialogs: DialogsPropsType[]
+    messages: MessagesPropsType[]
+    newMessageBody: string
+}
+
+let initialState: MessagesPagePropsType = {
     dialogs: [
         {id: 1, name: 'Alla'},
         {id: 2, name: 'Ann'},
@@ -21,17 +36,22 @@ let initialState = {
     newMessageBody: ''
 }
 
-export const messageReducer = (state: MessagesPagePropsType = initialState, action: ActionsTypes) => {
-
+export const messageReducer = (state: MessagesPagePropsType = initialState, action: ActionsTypes): MessagesPagePropsType => {
+    let stateCopy;
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body;
-            return state
-        case SEND_MESSAGE:
+        case UPDATE_NEW_MESSAGE_BODY: {
+            stateCopy = {...state, newMessageBody: action.body}
+            return stateCopy;
+        }
+
+        case SEND_MESSAGE: {
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: new Date().getTime(), message: body})
-            return state;
+            stateCopy = {
+                ...state, messages: [...state.messages, {id: new Date().getTime(), message: body}],
+                newMessageBody: ''
+            }
+            return stateCopy;
+        }
         default:
             return state;
     }
