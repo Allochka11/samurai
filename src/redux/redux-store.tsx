@@ -3,11 +3,13 @@ import {combineReducers} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {messageReducer} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import {usersReducer} from "./users-reducer";
 
 let rootReducer = combineReducers({
     profileReducer: profileReducer,
     messageReducer: messageReducer,
-    sidebarReducer: sidebarReducer
+    sidebarReducer: sidebarReducer,
+    usersPage: usersReducer
 });
 
 

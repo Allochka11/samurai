@@ -5,38 +5,6 @@ import {AppRootStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
-// const MyPostsContainer = () => {
-//
-//     return (
-//
-//         <StoreContext.Consumer>
-//             {
-//                 (store) => {
-//                     let state = store.getState().profileReducer;
-//                     const addPost = () => {
-//                         store.dispatch(addPostActionCreator());
-//                     };
-//
-//                     const onPostChange = (text: string) => {
-//                         let action = onPostChangeActionCreator(text);
-//                         store.dispatch(action);
-//                     }
-//                     return (
-//                         <MyPosts updateNewPostText={onPostChange}
-//                                  addPost={addPost}
-//                                  postData={state.postData}
-//                                  newPostText={state.newPostText}
-//                         />
-//                     )
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//
-//     )
-// }
-//
-// export default MyPostsContainer;
-
 type MapStatePropsType = {
     postData: PostDataPropsType[]
     newPostText: string

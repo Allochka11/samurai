@@ -2,6 +2,7 @@ import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from ".
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
+import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
 
 type MessagesPropsType = {
     id: number
@@ -94,7 +95,10 @@ export type ReducersPropsType = {
 export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof onPostChangeActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
-    ReturnType<typeof updateNewMessageBodyActionCreator>
+    ReturnType<typeof updateNewMessageBodyActionCreator> |
+    ReturnType<typeof followAC> |
+    ReturnType<typeof unfollowAC> |
+    ReturnType<typeof setUsersAC>
 
 
 let store: StoreType = {
