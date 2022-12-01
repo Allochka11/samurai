@@ -2,7 +2,14 @@ import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from ".
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./users-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    toggleIsFetchingAC,
+    unfollowAC
+} from "./users-reducer";
 
 type MessagesPropsType = {
     id: number
@@ -100,7 +107,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC> |
     ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalUsersCountAC>
+    ReturnType<typeof setTotalUsersCountAC> |
+    ReturnType<typeof toggleIsFetchingAC>
 
 
 let store: StoreType = {
