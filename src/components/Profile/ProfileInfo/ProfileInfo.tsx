@@ -1,28 +1,68 @@
 import React from "react";
-import MyPosts from "../MyPosts/MyPosts";
 import s from './ProfileInfo.module.css';
+import {ProfilePropsType} from "../Profile";
+import {Preloader} from "../../common/Preloader/Preloader";
+import user from '../../../assets/images/user.png';
+import haveJob from '../../../assets/images/loveMyJob.jpg';
+import lookingForAJob from '../../../assets/images/lookingForAJob.jpeg';
+import tw from '../../../assets/socialMediaIcons/twitter.svg';
+import fb from '../../../assets/socialMediaIcons/facebook.svg';
+import inst from '../../../assets/socialMediaIcons/instagram.svg';
+import gh from '../../../assets/socialMediaIcons/github.svg';
+import youtube from '../../../assets/socialMediaIcons/youtube.svg';
 
-type ProfileInfoType = {}
 
-export const ProfileInfo = (props: ProfileInfoType) => {
-    let profiles = {
-        userName:'Vasya Pupkin',
-        avatarUrl:'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg',
-        profileHeaderImg:'https://www.searchenginejournal.com/wp-content/uploads/2018/10/How-to-Boost-Your-Images%E2%80%99-Visibility-on-Google-Images-760x400.png',
-
+export const ProfileInfo = (props: ProfilePropsType) => {
+    if (!props.profile) {
+        return <div><Preloader/>
+            <div>User not found</div>
+        </div>
     }
-    
-    return(
+    return (
         <div>
             <div className={s.profile__header}>
-                <img src={profiles.profileHeaderImg} alt={`${s.avatar}+ ${s.header}`}/>
+                <img src={props.profile.lookingForAJob ? lookingForAJob : haveJob}
+                     className={`${s.avatar}+ ${s.header}`}/>
             </div>
             <div className={s.profile__main}>
-                <img src={profiles.avatarUrl} alt="avatar" className={s.profile__avatar}/>
-                <div className={s.profile__name}>{profiles.userName}</div>
+                <img src={props.profile.photos?.small ? props.profile.photos.small : user} alt="avatar"
+                     className={s.profile__avatar}/>
+                <div>
+                    <div className={s.profile__name}>{props.profile.fullName}</div>
+                    <div className={s.aboutMe}>{props.profile.aboutMe}</div>
+                </div>
             </div>
+            <div className={s.contacts}>
+                {props.profile.contacts.twitter && <span><a href={props.profile.contacts.twitter} target="_blank"
+                                                            rel="noopener noreferrer">
+                            <img className={s.contacts__icon} src={tw}/></a>
+                        </span>}
+                {props.profile.contacts.facebook &&
+                    <span><a href={props.profile.contacts.facebook} target="_blank"
+                             rel="noopener noreferrer">
+                            <img className={s.contacts__icon} src={fb}/></a>
+                        </span>
 
-        
+                }
+                {props.profile.contacts.instagram &&
+                    <span><a href={props.profile.contacts.instagram} target="_blank"
+                             rel="noopener noreferrer">
+                            <img className={s.contacts__icon} src={inst}/></a>
+                        </span>
+                }
+                {props.profile.contacts.github &&
+                    <span><a href={props.profile.contacts.github} target="_blank"
+                             rel="noopener noreferrer">
+                            <img className={s.contacts__icon} src={gh}/></a>
+                        </span>
+                }
+                {props.profile.contacts.youtube &&
+                    <span><a href={props.profile.contacts.youtube} target="_blank"
+                             rel="noopener noreferrer">
+                            <img className={s.contacts__icon} src={youtube}/></a>
+                        </span>
+                }
+            </div>
         </div>
     );
 };

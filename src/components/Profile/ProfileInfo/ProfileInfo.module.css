@@ -20,7 +20,32 @@
 
 .profile__avatar {
     width: 80px;
+    height: 80px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.profile__name {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.aboutMe {
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.contacts {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.contacts__icon {
+    width: 30px;
+    height: 30px;
 }
 

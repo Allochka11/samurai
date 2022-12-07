@@ -1,4 +1,4 @@
-import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from "./profile-reducer";
+import {addPostActionCreator, onPostChangeActionCreator, profileReducer, setUserProfile} from "./profile-reducer";
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
@@ -108,63 +108,64 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof toggleIsFetching>
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof setUserProfile>
 
 
-let store: StoreType = {
-    _state: {
-        messagesPage: {
-            dialogs: [
-                {id: 1, name: 'Alla'},
-                {id: 2, name: 'Ann'},
-                {id: 3, name: 'Oll'},
-                {id: 4, name: 'All'},
-                {id: 5, name: 'Nick'},
-            ],
-            messages: [
-                {id: 1, message: 'Hello'},
-                {id: 2, message: 'How'},
-                {id: 3, message: 'Are'},
-                {id: 4, message: 'You?'},
-                {id: 5, message: '!!!'},
-            ],
-            newMessageBody: ''
-        },
-
-        profilePage: {
-            postData: [
-                {id: 1, message: 'Hi, how are you?', likesCount: 11},
-                {id: 2, message: 'It\'s my first post', likesCount: 12},
-            ],
-            newPostText: 'it_camasutra.com'
-        },
-
-        sidebar: {
-            friends: [
-                {id: 1, name: 'Sasha'},
-                {id: 2, name: 'Petya'},
-                {id: 3, name: 'Ivan'},
-            ]
-        }
-    },
-    _rerenderEntireState() {
-        console.log('State was changed');
-    },
-
-    getState() {
-        return this._state
-    },
-    subscribe(observer: () => void) {
-        this._rerenderEntireState = observer;
-
-    },
-
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.messagesPage = messageReducer(this._state.messagesPage, action);
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-        this._rerenderEntireState(this._state);
-    }
-}
-export default store;
+// let store: StoreType = {
+//     _state: {
+//         messagesPage: {
+//             dialogs: [
+//                 {id: 1, name: 'Alla'},
+//                 {id: 2, name: 'Ann'},
+//                 {id: 3, name: 'Oll'},
+//                 {id: 4, name: 'All'},
+//                 {id: 5, name: 'Nick'},
+//             ],
+//             messages: [
+//                 {id: 1, message: 'Hello'},
+//                 {id: 2, message: 'How'},
+//                 {id: 3, message: 'Are'},
+//                 {id: 4, message: 'You?'},
+//                 {id: 5, message: '!!!'},
+//             ],
+//             newMessageBody: ''
+//         },
+//
+//         profilePage: {
+//             postData: [
+//                 {id: 1, message: 'Hi, how are you?', likesCount: 11},
+//                 {id: 2, message: 'It\'s my first post', likesCount: 12},
+//             ],
+//             newPostText: 'it_camasutra.com'
+//         },
+//
+//         sidebar: {
+//             friends: [
+//                 {id: 1, name: 'Sasha'},
+//                 {id: 2, name: 'Petya'},
+//                 {id: 3, name: 'Ivan'},
+//             ]
+//         }
+//     },
+//     _rerenderEntireState() {
+//         console.log('State was changed');
+//     },
+//
+//     getState() {
+//         return this._state
+//     },
+//     subscribe(observer: () => void) {
+//         this._rerenderEntireState = observer;
+//
+//     },
+//
+//     dispatch(action) {
+//         this._state.profilePage = profileReducer(this._state.profilePage, action);
+//         this._state.messagesPage = messageReducer(this._state.messagesPage, action);
+//         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+//         this._rerenderEntireState(this._state);
+//     }
+// }
+// export default store;
 
