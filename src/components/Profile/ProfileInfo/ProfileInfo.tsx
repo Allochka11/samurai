@@ -13,6 +13,8 @@ import youtube from '../../../assets/socialMediaIcons/youtube.svg';
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
+
+
     if (!props.profile) {
         return <div><Preloader/>
             <div>User not found</div>
@@ -22,7 +24,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         <div>
             <div className={s.profile__header}>
                 <img src={props.profile.lookingForAJob ? lookingForAJob : haveJob}
-                     className={`${s.avatar}+ ${s.header}`}/>
+                     className={s.header}/>
             </div>
             <div className={s.profile__main}>
                 <img src={props.profile.photos?.small ? props.profile.photos.small : user} alt="avatar"

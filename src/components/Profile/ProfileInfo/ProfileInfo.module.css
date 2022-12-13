@@ -2,6 +2,12 @@
 .profile__header {
     margin-bottom: 10px;
     height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.header {
+    transform: scale(1.2);
 }
 
 /*img {*/

@@ -11,11 +11,11 @@ export type ProfilePropsType = {
 
 
 function Profile(props: ProfilePropsType) {
-
+    console.log(props)
     return (
         <div className={s.profile}>
             <ProfileInfo profile={props.profile} setUserProfile={props.setUserProfile}/>
-            {props.profile && <MyPostsContainer/>}
+            <MyPostsContainer/>
 
         </div>
     )
