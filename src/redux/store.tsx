@@ -10,6 +10,7 @@ import {
     toggleIsFetching,
     unfollow
 } from "./users-reducer";
+import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
 
 type MessagesPropsType = {
     id: number
@@ -109,7 +110,9 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setAuthUserDataAC> |
+    ReturnType<typeof setUserAvatarAC>
 
 
 // let store: StoreType = {

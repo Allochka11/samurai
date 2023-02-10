@@ -27,7 +27,7 @@ export const Users = (props: UsersType) => {
     return <div>
         <div>
             {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selectedPage : s.pagination}
+                return <span key={p} className={props.currentPage === p ? s.selectedPage : s.pagination}
                              onClick={() => props.onClickPageHandler(p)}>
                         {p}
                     </span>
@@ -38,7 +38,7 @@ export const Users = (props: UsersType) => {
         {props.users.map((el) => (<div key={el.id}>
                 <span>
                     <div>
-                        <NavLink to={'/profile/' + el.id}>
+                        <NavLink to={'/profile/' + el.id} key={el.id}>
                             <img src={el.photos.small !== null ? el.photos.small : userPhoto} alt=""
                                  className={s.userPhoto}/>
                         </NavLink>

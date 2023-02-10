@@ -11,7 +11,7 @@ export type ProfilePropsType = {
 
 
 function Profile(props: ProfilePropsType) {
-    console.log(props)
+    // console.log(props)
     return (
         <div className={s.profile}>
             <ProfileInfo profile={props.profile} setUserProfile={props.setUserProfile}/>
