@@ -22,8 +22,7 @@ function Header(props: HeaderPropsType) {
                     {props.isAuth
                         ?
                         <div className={s.loginAndAvatar}>
-                            <img className={s.avatar} src={props.avatar ? props.avatar : user} alt=""/>
-
+                            <img className={s.avatar} src={props.avatar !== null ? props.avatar : user} alt=""/>
                             Hi, {props.login}
                         </div>
                         : <NavLink to={'login'} className={s.loginText}>Login</NavLink>

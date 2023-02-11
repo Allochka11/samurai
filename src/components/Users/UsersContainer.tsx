@@ -10,9 +10,9 @@ import {
     UsersPropsType
 } from "../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 type MapStatePropsType = {
     users: UsersPropsType[]
@@ -33,22 +33,21 @@ export type UsersMapStateDispatchPropsTypes = MapStatePropsType & MapDispatchPro
 
 class UsersContainer extends React.Component<UsersMapStateDispatchPropsTypes> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                // this.props.setTotalUsersCount(response.data.totalCount)
+        this.props.toggleIsFetching(true);
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items)
                 this.props.toggleIsFetching(false)
             })
     }
 
     onClickPageHandler = (p: number) => {
+
         this.props.setCurrentPage(p);
         this.props.toggleIsFetching(true)
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
+        usersAPI.getUsers(p, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.toggleIsFetching(false)
             })
     }

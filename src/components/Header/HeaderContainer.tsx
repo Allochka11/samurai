@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {setAuthUserDataAC, setUserAvatarAC} from "../../redux/auth-reducer";
+import {authAPI, profileAPI} from "../../api/api";
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -20,20 +21,17 @@ type MapAllPropsTypes = MapStatePropsType & MapDispatchPropsType
 
 class HeaderContainer extends React.Component<MapAllPropsTypes> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then(response => {
-                console.log(response.data.resultCode)
-                let {id, email, login} = response.data.data;
-                if (response.data.resultCode === 0) {
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
+        authAPI.getAuth()
+            .then(data => {
+                let {id, email, login} = data.data;
+                if (data.resultCode === 0) {
                     this.props.setAuthUserDataAC(id, email, login);
-
-                    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + +id)
-                        .then(response => {
-                            console.log(response.data.photos.small)
-                            this.props.setUserAvatarAC(response.data.photos.small)
+                    profileAPI.getProfile(id)
+                        .then(data => {
+                            this.props.setUserAvatarAC(data.photos.small)
                         })
                 }
-
             })
     }
 
