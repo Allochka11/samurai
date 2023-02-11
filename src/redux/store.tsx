@@ -7,7 +7,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching,
+    toggleIsFetching, toggleIsFollowingProgressAC,
     unfollow
 } from "./users-reducer";
 import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
@@ -112,7 +112,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setAuthUserDataAC> |
-    ReturnType<typeof setUserAvatarAC>
+    ReturnType<typeof setUserAvatarAC> |
+    ReturnType<typeof toggleIsFollowingProgressAC>
 
 
 // let store: StoreType = {

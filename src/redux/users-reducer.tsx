@@ -6,6 +6,7 @@ export const SET_USERS = "SET_USERS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+export const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 
 type LocationPropsType = {
@@ -33,6 +34,7 @@ export type UsersPagePropsType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: []
 }
 
 let initialState: UsersPagePropsType = {
@@ -40,7 +42,8 @@ let initialState: UsersPagePropsType = {
     totalUsersCount: 100,
     pageSize: 10,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 export const usersReducer = (state: UsersPagePropsType = initialState, action: ActionsTypes): UsersPagePropsType => {
@@ -63,6 +66,23 @@ export const usersReducer = (state: UsersPagePropsType = initialState, action: A
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isInProgress
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            } as UsersPagePropsType
+
+
+            // return {
+            //     ...state,
+            //     followingInProgress: action.isInProgress
+            //         ? [...state.followingInProgress, action.userId]
+            //         : state.followingInProgress.filter(userId => userId !== action.userId)
+            // } as UsersPagePropsType
+        }
+
         default:
             return state;
     }
@@ -80,5 +100,10 @@ export let setTotalUsersCount = (totalUsersCount: number) => ({
 export let toggleIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching
+}) as const;
+
+export let toggleIsFollowingProgressAC = (isInProgress: boolean, userId: number) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isInProgress, userId
 }) as const;
 
