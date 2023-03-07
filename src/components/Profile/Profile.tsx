@@ -9,9 +9,8 @@ export type ProfilePropsType = {
     setUserProfile: (profile: ProfileType) => void
 }
 
-
 function Profile(props: ProfilePropsType) {
-    // console.log(props)
+
     return (
         <div className={s.profile}>
             <ProfileInfo profile={props.profile} setUserProfile={props.setUserProfile}/>

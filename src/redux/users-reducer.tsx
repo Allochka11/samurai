@@ -1,4 +1,6 @@
 import {ActionsTypes} from "./store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
@@ -88,8 +90,8 @@ export const usersReducer = (state: UsersPagePropsType = initialState, action: A
     }
 }
 
-export let follow = (userId: number) => ({type: FOLLOW, userId}) as const;
-export let unfollow = (userId: number) => ({type: UNFOLLOW, userId}) as const;
+export let followSuccess = (userId: number) => ({type: FOLLOW, userId}) as const;
+export let unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId}) as const;
 export let setUsers = (users: UsersPropsType[]) => ({type: SET_USERS, users}) as const;
 export let setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage}) as const;
 export let setTotalUsersCount = (totalUsersCount: number) => ({
@@ -106,4 +108,49 @@ export let toggleIsFollowingProgressAC = (isInProgress: boolean, userId: number)
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isInProgress, userId
 }) as const;
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items));
+                dispatch(toggleIsFetching(false));
+            })
+    }
+}
+// props.toggleIsFollowingProgressAC(true, el.id)
+// usersAPI.setUnfollow(el.id)
+//     .then(data => {
+//         if (data.resultCode === 0) {
+//             props.unfollow(el.id)
+//         }
+//         props.toggleIsFollowingProgressAC(false, el.id)
+//     })
+
+export const followThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFollowingProgressAC(true, userId))
+        usersAPI.setFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followSuccess(userId));
+                }
+                dispatch(toggleIsFollowingProgressAC(false, userId))
+            })
+    }
+}
+
+export const unfollowThunkCreator = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFollowingProgressAC(true, userId));
+        usersAPI.setUnfollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowSuccess(userId));
+                }
+                dispatch(toggleIsFollowingProgressAC(false, userId));
+            })
+    }
+}
 

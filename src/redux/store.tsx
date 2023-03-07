@@ -3,12 +3,12 @@ import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCrea
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching, toggleIsFollowingProgressAC,
-    unfollow
+    unfollowSuccess
 } from "./users-reducer";
 import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
 
@@ -104,8 +104,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof onPostChangeActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
     ReturnType<typeof updateNewMessageBodyActionCreator> |
-    ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
+    ReturnType<typeof followSuccess> |
+    ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |

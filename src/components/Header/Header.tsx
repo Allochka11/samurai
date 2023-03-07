@@ -10,7 +10,6 @@ export type HeaderPropsType = {
 }
 
 function Header(props: HeaderPropsType) {
-    console.log(props.avatar)
 
     return (
         <div className={s.header}>

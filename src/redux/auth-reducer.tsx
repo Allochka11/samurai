@@ -1,4 +1,6 @@
 import {ActionsTypes} from "./store";
+import {Dispatch} from "redux";
+import {authAPI, profileAPI} from "../api/api";
 
 
 export const SET_USER_DATA = "SET_USER_DATA";
@@ -43,6 +45,23 @@ export let setUserAvatarAC = (avatar: string) => ({
     type: SET_USER_AVATAR,
     avatar
 }) as const;
+
+
+export const getAuthThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        authAPI.me()
+            .then(data => {
+                let {id, email, login} = data.data;
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserDataAC(id, email, login));
+                    profileAPI.getProfile(id)
+                        .then(response => {
+                            dispatch(setUserAvatarAC(response.data.photos.small));
+                        })
+                }
+            })
+    }
+}
 
 
 
