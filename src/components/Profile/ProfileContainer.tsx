@@ -5,6 +5,7 @@ import {AppRootStateType} from "../../redux/redux-store";
 import {profileThunkCreator, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStatePropsType = {
@@ -57,10 +58,16 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
     profile: state.profileReducer.profile
 })
 
-// @ts-ignore
-// let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
+export default compose<React.FC>(
+    connect(mapStateToProps, {setUserProfile, profileThunkCreator}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
 
-export default withRouter(connect(mapStateToProps, {
-    setUserProfile,
-    profileThunkCreator
-})(ProfileContainer));
+// let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
+// let A = withAuthRedirect(ProfileContainer)
+
+// export default compose<React.Component>(withAuthRedirect(withRouter(connect(mapStateToProps, {
+//     setUserProfile,
+//     profileThunkCreator
+// }))(ProfileContainer)));
