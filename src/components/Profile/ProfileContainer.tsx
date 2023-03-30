@@ -4,13 +4,12 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {profileThunkCreator, ProfileType, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type MapStatePropsType = {
-    // profile: ProfileType | null
     profile: ProfileType | null
-    isAuth: boolean
+
 }
 type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void
@@ -26,8 +25,9 @@ export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsTyp
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
+
     componentDidMount() {
-        // debugger
+
         let userId = this.props.match.params.userId;
 
         if (!userId) {
@@ -42,10 +42,11 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
+        // if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <div>
-                <Profile setUserProfile={this.props.setUserProfile} profile={this.props.profile}
+                <Profile {...this.props} setUserProfile={this.props.setUserProfile} profile={this.props.profile}
+
                 />
             </div>
         );
@@ -53,8 +54,13 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 }
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
-    profile: state.profileReducer.profile,
-    isAuth: state.auth.isAuth
+    profile: state.profileReducer.profile
 })
 
-export default withRouter(connect(mapStateToProps, {setUserProfile, profileThunkCreator})(ProfileContainer));
+// @ts-ignore
+// let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
+
+export default withRouter(connect(mapStateToProps, {
+    setUserProfile,
+    profileThunkCreator
+})(ProfileContainer));

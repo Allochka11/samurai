@@ -11,9 +11,10 @@ export type ProfilePropsType = {
 
 function Profile(props: ProfilePropsType) {
 
+
     return (
         <div className={s.profile}>
-            <ProfileInfo profile={props.profile} setUserProfile={props.setUserProfile}/>
+            <ProfileInfo {...props}/>
             <MyPostsContainer/>
 
         </div>
