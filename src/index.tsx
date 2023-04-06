@@ -1,24 +1,42 @@
-import React from 'react';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import store, {AppRootStateType} from "./redux/redux-store";
-import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
-import App from "./App";
-import {Provider} from "react-redux";
+// import React from 'react';
+// import './index.css';
+// import reportWebVitals from './reportWebVitals';
+// import store, {AppRootStateType} from "./redux/redux-store";
+// import ReactDOM from "react-dom";
+// import {BrowserRouter} from "react-router-dom";
+// import App from "./App";
+// import {Provider} from "react-redux";
+//
+// ReactDOM.render(
+//     <BrowserRouter>
+//         {/*eslint-disable-next-line react/jsx-no-undef*/}
+//         <Provider store={store}>
+//             <App/>
+//         </Provider>
+//     </BrowserRouter>,
+//     document.getElementById('root')
+// );
+//
+// reportWebVitals();
 
-ReactDOM.render(
+
+import React from "react";
+// @ts-ignore
+import {createRoot} from "react-dom/client";
+import {Provider} from "react-redux";
+import App from "./App";
+import store from "./redux/redux-store";
+import {BrowserRouter} from "react-router-dom";
+
+
+const container = document.getElementById("root") as HTMLElement;
+const root = createRoot(container);
+
+root.render(
     <BrowserRouter>
-        {/* eslint-disable-next-line react/jsx-no-undef */}
         <Provider store={store}>
             <App/>
         </Provider>
-    </BrowserRouter>,
-    document.getElementById('root')
+    </BrowserRouter>
 );
 
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
