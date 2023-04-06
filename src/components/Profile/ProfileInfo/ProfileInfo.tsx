@@ -10,6 +10,7 @@ import fb from '../../../assets/socialMediaIcons/facebook.svg';
 import inst from '../../../assets/socialMediaIcons/instagram.svg';
 import gh from '../../../assets/socialMediaIcons/github.svg';
 import youtube from '../../../assets/socialMediaIcons/youtube.svg';
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
@@ -22,16 +23,18 @@ export const ProfileInfo = (props: ProfilePropsType) => {
     }
     return (
         <div>
-            <div className={s.profile__header}>
-                <img src={props.profile.lookingForAJob ? lookingForAJob : haveJob}
-                     className={s.header}/>
-            </div>
+            {/*<div className={s.profile__header}>*/}
+            {/*    <img src={props.profile.lookingForAJob ? lookingForAJob : haveJob}*/}
+            {/*         className={s.header}/>*/}
+            {/*</div>*/}
             <div className={s.profile__main}>
                 <img src={props.profile.photos?.small ? props.profile.photos.small : user} alt="avatar"
                      className={s.profile__avatar}/>
                 <div>
                     <div className={s.profile__name}>{props.profile.fullName}</div>
                     <div className={s.aboutMe}>{props.profile.aboutMe}</div>
+                    <ProfileStatus status={'Test status'}/>
+                    {/*<div className={s.aboutMe}> </div>*/}
                 </div>
             </div>
             <div className={s.contacts}>

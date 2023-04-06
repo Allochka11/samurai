@@ -61,7 +61,7 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
 export default compose<React.FC>(
     connect(mapStateToProps, {setUserProfile, profileThunkCreator}),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer);
 
 // let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
