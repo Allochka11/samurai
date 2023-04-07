@@ -7,10 +7,11 @@ import {ProfileType} from "../../redux/profile-reducer";
 export type ProfilePropsType = {
     profile: ProfileType | null
     setUserProfile: (profile: ProfileType) => void
+    status: string
+    updateStatus: (status: string) => void
 }
 
 function Profile(props: ProfilePropsType) {
-
 
     return (
         <div className={s.profile}>

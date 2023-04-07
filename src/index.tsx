@@ -9,7 +9,6 @@
 //
 // ReactDOM.render(
 //     <BrowserRouter>
-//         {/*eslint-disable-next-line react/jsx-no-undef*/}
 //         <Provider store={store}>
 //             <App/>
 //         </Provider>

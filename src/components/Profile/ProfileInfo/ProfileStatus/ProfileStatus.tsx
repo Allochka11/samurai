@@ -1,58 +1,67 @@
-import React from "react";
+import React, {ChangeEventHandler} from "react";
 import {profileAPI} from "../../../../api/api";
+import {updateStatus} from "../../../../redux/profile-reducer";
 
 type ProfileStatusType = {
     status: string
     userId: number
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
 
-
     state = {
         editMode: false,
-        status: ''
+        status: this.props.status
     }
 
-    componentDidMount() {
-        console.log(this)
-        profileAPI.getProfileStatus(this.props.userId).then(data => {
-            this.setState({status: data})
-        })
-
-
-        // this.setState({status: a})
-        // console.log(a)
-    }
 
     onDoubleClickHandler = () => {
-
-
         this.setState({editMode: true})
-        console.log('double click')
     }
 
-    onBlurHandler() {
-
+    onBlurHandler = () => {
         this.setState({editMode: false})
-        console.log('onBlur')
+        this.props.updateStatus(this.state.status)
+    }
+    handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.code === 'Enter') {
+            this.props.updateStatus(this.state.status)
+            this.setState({editMode: false})
+
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
+    onChangeStatusHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: e.currentTarget.value})
     }
 
     render() {
+
         return (
             <div>
                 {this.state.editMode ?
 
                     <div>
-                        <input type="text" value={this.props.status}
-                               onBlur={this.onBlurHandler.bind(this)}
+                        <input type="text" value={this.state.status}
+                               onBlur={this.onBlurHandler}
                                autoFocus={true}
+                               onChange={this.onChangeStatusHandler}
+                               onKeyDown={this.handleKeyDown}
+
                         />
                     </div>
                     :
                     <div>
-                        eslint-disable-next-line no-restricted-globals
-                        <span onDoubleClick={this.onDoubleClickHandler}>{this.state.status} span</span>
+                        <span onDoubleClick={this.onDoubleClickHandler}>{this.props.status || 'No status'} </span>
                     </div>
 
                 }

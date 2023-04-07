@@ -1,4 +1,5 @@
 import axios from "axios";
+import {log} from "util";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -35,9 +36,9 @@ export const profileAPI = {
         return instance.get(`profile/status/${userId}`).then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status}).then(response => response.data)
+        return instance.put(`profile/status/`, {status})
     },
-    
+
 }
 
 // export const followAPI = {

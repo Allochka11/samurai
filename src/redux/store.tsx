@@ -1,4 +1,10 @@
-import {addPostActionCreator, onPostChangeActionCreator, profileReducer, setUserProfile} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    onPostChangeActionCreator,
+    profileReducer,
+    setProfileStatus,
+    setUserProfile, updateProfileStatus, updateStatus
+} from "./profile-reducer";
 import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {AppStoreType} from "./redux-store";
@@ -113,7 +119,9 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setAuthUserDataAC> |
     ReturnType<typeof setUserAvatarAC> |
-    ReturnType<typeof toggleIsFollowingProgressAC>
+    ReturnType<typeof toggleIsFollowingProgressAC> |
+    ReturnType<typeof setProfileStatus> |
+    ReturnType<typeof updateProfileStatus>
 
 
 // let store: StoreType = {

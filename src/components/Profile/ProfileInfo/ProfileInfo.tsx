@@ -14,7 +14,6 @@ import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
-    console.log(props.profile?.userId)
 
     if (!props.profile) {
         return <div><Preloader/>
@@ -33,7 +32,10 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                 <div>
                     <div className={s.profile__name}>{props.profile.fullName}</div>
                     <div className={s.aboutMe}>{props.profile.aboutMe}</div>
-                    <ProfileStatus status={'Test status'} userId={props.profile.userId}/>
+                    <ProfileStatus status={props.status}
+                                   userId={props.profile.userId}
+                                   updateStatus={props.updateStatus}
+                    />
                     {/*<div className={s.aboutMe}> </div>*/}
                 </div>
             </div>

@@ -2,19 +2,28 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {profileThunkCreator, ProfileType, setUserProfile} from "../../redux/profile-reducer";
+import {
+    profileThunkCreator,
+    ProfileType,
+    setUserProfile,
+    getProfileStatusThunkCreator, updateStatus
+} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {profileAPI} from "../../api/api";
 
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    status: string
 
 }
 type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void
     profileThunkCreator: (userId: string) => void
+    getProfileStatusThunkCreator: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 type PathParamsType = {
     userId: string
@@ -28,17 +37,13 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 
     componentDidMount() {
-
         let userId = this.props.match.params.userId;
 
         if (!userId) {
-            userId = String(2)
+            userId = String(26074)
         }
         this.props.profileThunkCreator(userId)
-        // profileAPI.getProfile(+userId)
-        //     .then(data => {
-        //         this.props.setUserProfile(data)
-        //     })
+        this.props.getProfileStatusThunkCreator(userId)
     }
 
 
@@ -46,7 +51,11 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         // if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <div>
-                <Profile {...this.props} setUserProfile={this.props.setUserProfile} profile={this.props.profile}
+                <Profile {...this.props} setUserProfile={this.props.setUserProfile}
+                         profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}
+
 
                 />
             </div>
@@ -55,11 +64,16 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 }
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
-    profile: state.profileReducer.profile
+    profile: state.profileReducer.profile,
+    status: state.profileReducer.status
 })
 
 export default compose<React.FC>(
-    connect(mapStateToProps, {setUserProfile, profileThunkCreator}),
+    connect(mapStateToProps,
+        {
+            setUserProfile, profileThunkCreator,
+            getProfileStatusThunkCreator, updateStatus
+        }),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer);
