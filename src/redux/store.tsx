@@ -1,22 +1,22 @@
 import {
     addPostActionCreator,
     onPostChangeActionCreator,
-    profileReducer,
     setProfileStatus,
-    setUserProfile, updateProfileStatus, updateStatus
+    setUserProfile,
+    updateProfileStatus
 } from "./profile-reducer";
-import {messageReducer, sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
-import {sidebarReducer} from "./sidebar-reducer";
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
 import {AppStoreType} from "./redux-store";
 import {
     followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching, toggleIsFollowingProgressAC,
+    toggleIsFetching,
+    toggleIsFollowingProgressAC,
     unfollowSuccess
 } from "./users-reducer";
-import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
+import {loginUser, setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
 
 type MessagesPropsType = {
     id: number
@@ -121,7 +121,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserAvatarAC> |
     ReturnType<typeof toggleIsFollowingProgressAC> |
     ReturnType<typeof setProfileStatus> |
-    ReturnType<typeof updateProfileStatus>
+    ReturnType<typeof updateProfileStatus> |
+    ReturnType<typeof loginUser>
 
 
 // let store: StoreType = {

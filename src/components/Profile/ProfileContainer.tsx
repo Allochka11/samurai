@@ -3,22 +3,21 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
+    getProfileStatusThunkCreator,
     profileThunkCreator,
     ProfileType,
     setUserProfile,
-    getProfileStatusThunkCreator, updateStatus
+    updateStatus
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {profileAPI} from "../../api/api";
 
 
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
-
 }
+
 type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void
     profileThunkCreator: (userId: string) => void
