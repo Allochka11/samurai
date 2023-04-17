@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 export const ADD_POST = "ADD-POST";
-export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+// export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_PROFILE_STATUS = "SET_PROFILE_STATUS";
 export const UPDATE_PROFILE_STATUS = "UPDATE_PROFILE_STATUS";
@@ -40,7 +40,7 @@ export type PostDataPropsType = {
 }
 export type ProfilePagePropsType = {
     postData: PostDataPropsType[]
-    newPostText: string
+    // newPostText: string
     profile: ProfileType | null
     status: string
 }
@@ -50,7 +50,7 @@ let initialState: ProfilePagePropsType = {
         {id: 1, message: 'Hi, how are you?', likesCount: 11},
         {id: 2, message: 'It\'s my first post', likesCount: 12},
     ],
-    newPostText: 'it_camasutra.com',
+    // newPostText: 'it_camasutra.com',
     profile: null,
     status: ''
 }
@@ -60,18 +60,18 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
         case ADD_POST: {
             let newPostMessage: PostDataPropsType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 11
             };
             return {
                 ...state,
                 postData: [...state.postData, newPostMessage],
-                newPostText: ''
+                // newPostText: ''
             };
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText}
-        }
+        // case UPDATE_NEW_POST_TEXT: {
+        //     return {...state, newPostText: action.newText}
+        // }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -86,11 +86,11 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
             return state
     }
 }
-export let addPostActionCreator = () => ({type: ADD_POST}) as const
-export let onPostChangeActionCreator = (newText: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newText
-}) as const
+export let addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText}) as const
+// export let onPostChangeActionCreator = (newText: string) => ({
+//     type: UPDATE_NEW_POST_TEXT,
+//     newText: newText
+// }) as const
 
 
 export let setUserProfile = (profile: ProfileType) => ({

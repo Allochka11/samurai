@@ -15,7 +15,6 @@ type MessagesPropsType = {
 export type MessagesPagePropsType = {
     dialogs: DialogsPropsType[]
     messages: MessagesPropsType[]
-    newMessageBody: string
 }
 
 let initialState: MessagesPagePropsType = {
@@ -32,20 +31,18 @@ let initialState: MessagesPagePropsType = {
         {id: 3, message: 'Are'},
         {id: 4, message: 'You?'},
         {id: 5, message: '!!!'},
-    ],
-    newMessageBody: ''
+    ]
 }
 
 export const messageReducer = (state: MessagesPagePropsType = initialState, action: ActionsTypes): MessagesPagePropsType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY: {
-            return {...state, newMessageBody: action.body}
-        }
+        // case UPDATE_NEW_MESSAGE_BODY: {
+        //     return {...state, newMessageBody: action.body}
+        // }
         case SEND_MESSAGE: {
-            let body = state.newMessageBody;
+            // let body = state.newMessageBody;
             return {
-                ...state, messages: [...state.messages, {id: new Date().getTime(), message: body}],
-                newMessageBody: ''
+                ...state, messages: [...state.messages, {id: new Date().getTime(), message: action.newMessageBody}],
             }
         }
         default:
@@ -53,8 +50,8 @@ export const messageReducer = (state: MessagesPagePropsType = initialState, acti
     }
 }
 
-export let sendMessageActionCreator = () => ({type: SEND_MESSAGE}) as const;
-export let updateNewMessageBodyActionCreator = (body: string) => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body
-}) as const
+export let sendMessageActionCreator = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody}) as const;
+// export let updateNewMessageBodyActionCreator = (body: string) => ({
+//     type: UPDATE_NEW_MESSAGE_BODY,
+//     body: body
+// }) as const

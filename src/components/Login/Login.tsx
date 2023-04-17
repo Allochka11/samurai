@@ -11,7 +11,6 @@ export const Login = (props: LoginType) => {
     let onSubmit = (formData: FormDataType) => {
 
         let {login, password, rememberMe} = formData;
-
         props.loginUserThunkCreator(login, password, rememberMe)
 
     }

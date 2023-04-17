@@ -1,11 +1,11 @@
 import {
     addPostActionCreator,
-    onPostChangeActionCreator,
+    // onPostChangeActionCreator,
     setProfileStatus,
     setUserProfile,
     updateProfileStatus
 } from "./profile-reducer";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "./message-reducer";
+import {sendMessageActionCreator} from "./message-reducer";
 import {AppStoreType} from "./redux-store";
 import {
     followSuccess,
@@ -107,9 +107,9 @@ export type ReducersPropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof onPostChangeActionCreator> |
+    // ReturnType<typeof onPostChangeActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
-    ReturnType<typeof updateNewMessageBodyActionCreator> |
+    // ReturnType<typeof updateNewMessageBodyActionCreator> |
     ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |

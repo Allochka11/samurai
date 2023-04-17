@@ -1,0 +1,16 @@
+
+.formControl, .formControl:active {
+    /*border: 1px solid black;*/
+    /*outline: none;*/
+}
+
+.formControl.error input, .formControl.error textarea {
+    border: 3px solid red;
+    outline: none;
+}
+
+.error span {
+    color: red;
+    font-size: 13px;
+     
+}
