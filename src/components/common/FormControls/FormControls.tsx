@@ -1,24 +1,35 @@
 import React from "react";
 import s from './FormControls.module.css'
 
+type TextareaType = {}
+
 const FormControl = (props: any) => {
     const {input, meta, child, placeholder, ...restProps} = props
-    let hasError = meta && meta.touched && meta.error;
+
+    let hasError = meta.touched && meta.error;
+    // console.log(props.type)
     return (
         <div className={s.formControl + ' ' + (hasError ? s.error : ' ')}>
             <div>{props.children}</div>
-            {React.createElement(props.type, {
-                ...input,
-                placeholder
-            })}
+            {/*{React.createElement(props.type, {*/}
+            {/*    ...input,*/}
+            {/*    placeholder*/}
+            {/*})}*/}
             {hasError && <span>{meta.error}</span>}
         </div>
     );
 }
 export const Textarea = (props: any) => {
-    return <FormControl {...props}></FormControl>
+    const {input, meta, child, ...restProps} = props
+    return <FormControl {...props}>
+        {/*{props.type}*/}
+        <textarea {...input} {...restProps}/>
+    </FormControl>
 };
 
 export const Input = (props: any) => {
-    return <FormControl {...props}></FormControl>
+    const {input, meta, child, ...restProps} = props
+    return <FormControl {...props}>
+        <input  {...input} {...restProps}/>
+    </FormControl>
 };

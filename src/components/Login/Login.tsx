@@ -1,25 +1,36 @@
 import React from "react";
 import {FormDataType, LoginReduxForm} from "./LoginForm";
 import ProfileContainer from "../Profile/ProfileContainer";
+import {connect, useSelector} from "react-redux";
+import {loginUserThunkCreator} from "../../redux/auth-reducer";
+import {AppRootStateType, AppStoreType} from "../../redux/redux-store";
 
 type LoginType = {
-    loginUserThunkCreator: (email: string, password: string, rememberMe: boolean) => void
-    isAuth: boolean
+    // loginUserThunkCreator: (email: string, password: string, rememberMe: boolean) => void
+    // isAuth: boolean
 }
-export const Login = (props: LoginType) => {
+
+type MapDispatchType = {
+    loginUserThunkCreator: (email: string, password: string, rememberMe: boolean) => void
+
+}
+const Login = (props: LoginType & MapDispatchType) => {
+
+
+    let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth)
+    console.log(isAuth)
 
     let onSubmit = (formData: FormDataType) => {
-
         let {login, password, rememberMe} = formData;
         props.loginUserThunkCreator(login, password, rememberMe)
-
     }
 
     return (
-        <div>
-            {props.isAuth && <ProfileContainer/>}
-            {!props.isAuth && <LoginReduxForm onSubmit={onSubmit}/>}
+        <>
+            {isAuth && <ProfileContainer/>}
+            {!isAuth && <LoginReduxForm onSubmit={onSubmit}/>}
             {/*<LoginReduxForm onSubmit={onSubmit}/>*/}
-        </div>
+        </>
     );
 };
+export default connect(null, {loginUserThunkCreator})(Login)

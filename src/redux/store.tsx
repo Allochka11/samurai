@@ -1,10 +1,4 @@
-import {
-    addPostActionCreator,
-    // onPostChangeActionCreator,
-    setProfileStatus,
-    setUserProfile,
-    updateProfileStatus
-} from "./profile-reducer";
+import {addPostActionCreator, setProfileStatus, setUserProfile, updateProfileStatus} from "./profile-reducer";
 import {sendMessageActionCreator} from "./message-reducer";
 import {AppStoreType} from "./redux-store";
 import {
@@ -16,7 +10,7 @@ import {
     toggleIsFollowingProgressAC,
     unfollowSuccess
 } from "./users-reducer";
-import {loginUser, setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
+import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
 
 type MessagesPropsType = {
     id: number
@@ -121,8 +115,7 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserAvatarAC> |
     ReturnType<typeof toggleIsFollowingProgressAC> |
     ReturnType<typeof setProfileStatus> |
-    ReturnType<typeof updateProfileStatus> |
-    ReturnType<typeof loginUser>
+    ReturnType<typeof updateProfileStatus>
 
 
 // let store: StoreType = {

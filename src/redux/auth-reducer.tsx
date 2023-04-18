@@ -5,14 +5,12 @@ import {authAPI, profileAPI} from "../api/api";
 
 export const SET_USER_DATA = "SET_USER_DATA";
 export const SET_USER_AVATAR = "SET_USER_AVATAR";
-export const LOGIN_USER = "LOGIN_USER";
+
 
 type AuthPropsType = {
     id: number | null
     login: string | null
     email: string | null
-    password: string | null
-    rememberMe: boolean
     isAuth: boolean
     avatar: string | null
 }
@@ -21,8 +19,6 @@ let initialState: AuthPropsType = {
     id: null,
     login: null,
     email: null,
-    password: null,
-    rememberMe: false,
     isAuth: false,
     avatar: null
 }
@@ -32,18 +28,7 @@ export const authReducer = (state: AuthPropsType = initialState, action: Actions
         case SET_USER_DATA : {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
-            }
-        }
-        case LOGIN_USER: {
-            debugger
-            return {
-                ...state,
-                email: action.email,
-                password: action.password,
-                rememberMe: action.rememberMe,
-                isAuth: true
+                ...action.payload
             }
         }
 
@@ -52,9 +37,9 @@ export const authReducer = (state: AuthPropsType = initialState, action: Actions
     }
 }
 
-export let setAuthUserDataAC = (id: number, email: string, login: string) => ({
+export let setAuthUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {id, email, login}
+    payload: {id, email, login, isAuth}
 }) as const;
 
 export let setUserAvatarAC = (avatar: string) => ({
@@ -62,25 +47,21 @@ export let setUserAvatarAC = (avatar: string) => ({
     avatar
 }) as const;
 
-export let loginUser = (email: string, password: string, rememberMe: boolean) => ({
-    type: LOGIN_USER,
-    email, password, rememberMe
-}) as const;
-
 
 export const getAuthThunkCreator = () => {
     return (dispatch: Dispatch) => {
         authAPI.me()
             .then(data => {
-                let {id, email, login} = data.data;
                 if (data.resultCode === 0) {
-                    dispatch(setAuthUserDataAC(id, email, login));
+                    let {id, email, login} = data.data;
+                    dispatch(setAuthUserDataAC(id, email, login, true));
                     profileAPI.getProfile(id)
                         .then(response => {
                             dispatch(setUserAvatarAC(response.data.photos.small));
                         })
 
                 }
+
             })
     }
 }
@@ -88,17 +69,27 @@ export const getAuthThunkCreator = () => {
 export const loginUserThunkCreator = (email: string, password: string, rememberMe: boolean) => {
 
     return (dispatch: Dispatch) => {
-        authAPI.login(email, password, rememberMe = false)
+        authAPI.login(email, password, rememberMe)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    dispatch(loginUser(email, password, rememberMe))
+                    // @ts-ignore
+                    dispatch(getAuthThunkCreator())
                 } else {
                     console.log('unauthorized')
                 }
-                // let {id, email, login} = data.data;
-                // if (data.resultCode === 0) {
-                //     // dispatch(loginUser(login, password, rememberMe))
-                // }
+            })
+    }
+}
+export const logoutUserThunkCreator = () => {
+
+    return (dispatch: Dispatch) => {
+        authAPI.logout()
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserDataAC(null, null, null, false));
+                } else {
+                    console.log('unauthorized')
+                }
             })
     }
 }

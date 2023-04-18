@@ -3,13 +3,18 @@ import s from './Header.module.css'
 import user from '../../assets/images/user.png'
 import {NavLink} from "react-router-dom";
 
+
 export type HeaderPropsType = {
     isAuth: boolean
     login: string | null
     avatar: string | null
+    logoutUserThunkCreator: () => void
 }
 
 function Header(props: HeaderPropsType) {
+    let handlerLogout = () => {
+        props.logoutUserThunkCreator()
+    }
 
     return (
         <div className={s.header}>
@@ -23,9 +28,11 @@ function Header(props: HeaderPropsType) {
                         <div className={s.loginAndAvatar}>
                             <img className={s.avatar} src={props.avatar !== null ? props.avatar : user} alt=""/>
                             Hi, {props.login}
+                            <button onClick={handlerLogout}>Logout</button>
                         </div>
                         : <NavLink to={'login'} className={s.loginText}>Login</NavLink>
                     }
+
                 </div>
             </div>
         </div>
