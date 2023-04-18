@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
 import {Route, Switch} from "react-router-dom";
@@ -7,12 +7,18 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./redux/redux-store";
+import {Preloader} from "./components/common/Preloader/Preloader";
+
 
 function App() {
+    // let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth)
 
-
+    // console.log(isAuth)
     return (
         <div className={s.wrapper}>
+            {/*{isAuth ?*/}
             <div className={s.wrapper__container}>
                 <div className={s.content}>
                     <HeaderContainer/>
@@ -37,6 +43,9 @@ function App() {
                     </div>
                 </div>
             </div>
+            : <Preloader/>
+
+            {/*}*/}
         </div>
     );
 }

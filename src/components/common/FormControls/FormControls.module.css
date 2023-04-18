@@ -12,5 +12,10 @@
 .error span {
     color: red;
     font-size: 13px;
-     
+}
+
+.fieldSummaryError {
+    border: 1px solid red;
+    color: #ce8888;
+    padding: 5px;
 }

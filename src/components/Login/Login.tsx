@@ -15,21 +15,17 @@ type MapDispatchType = {
 
 }
 const Login = (props: LoginType & MapDispatchType) => {
-
-
     let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth)
-    console.log(isAuth)
-
     let onSubmit = (formData: FormDataType) => {
-        let {login, password, rememberMe} = formData;
-        props.loginUserThunkCreator(login, password, rememberMe)
+        let {email, password, rememberMe} = formData;
+        console.log(formData)
+        props.loginUserThunkCreator(email, password, rememberMe)
     }
 
     return (
         <>
             {isAuth && <ProfileContainer/>}
             {!isAuth && <LoginReduxForm onSubmit={onSubmit}/>}
-            {/*<LoginReduxForm onSubmit={onSubmit}/>*/}
         </>
     );
 };

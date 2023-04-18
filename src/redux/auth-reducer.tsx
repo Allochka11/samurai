@@ -1,11 +1,17 @@
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
 import {authAPI, profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {AppRootStateType} from "./redux-store";
 
 
 export const SET_USER_DATA = "SET_USER_DATA";
 export const SET_USER_AVATAR = "SET_USER_AVATAR";
 
+type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>;
+type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>;
 
 type AuthPropsType = {
     id: number | null
@@ -66,16 +72,16 @@ export const getAuthThunkCreator = () => {
     }
 }
 
-export const loginUserThunkCreator = (email: string, password: string, rememberMe: boolean) => {
+export const loginUserThunkCreator = (email: string, password: string, rememberMe: boolean): AppThunk => {
 
-    return (dispatch: Dispatch) => {
+    return (dispatch: AppDispatch) => {
         authAPI.login(email, password, rememberMe)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    // @ts-ignore
                     dispatch(getAuthThunkCreator())
                 } else {
-                    console.log('unauthorized')
+                    let message = data.messages.length > 0 && data.messages
+                    dispatch(stopSubmit('loginForm', {_error: message}))
                 }
             })
     }

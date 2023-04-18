@@ -17,11 +17,10 @@ let rootReducer = combineReducers({
     form: formReducer
 });
 
-
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-// @ts-ignore
-window.store = store
+
+(window as any).store = store;
 
 export type AppStoreType = typeof store;
 export type AppRootStateType = ReturnType<typeof rootReducer>

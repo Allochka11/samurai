@@ -16,6 +16,8 @@ import {compose} from "redux";
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorisedUserId: number | null
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -36,9 +38,12 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 
     componentDidMount() {
+        // console.log(this.props.isAuth)
+        // console.log(this.props.authorisedUserId)
         let userId = this.props.match.params.userId;
 
         if (!userId) {
+            // debugger
             userId = String(26074)
         }
         this.props.profileThunkCreator(userId)
@@ -64,7 +69,9 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
     profile: state.profileReducer.profile,
-    status: state.profileReducer.status
+    status: state.profileReducer.status,
+    authorisedUserId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<React.FC>(
