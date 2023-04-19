@@ -54,12 +54,14 @@ export let setUserAvatarAC = (avatar: string) => ({
 }) as const;
 
 
-export const getAuthThunkCreator = () => {
+export const getAuthUserDataThunkCreator = () => {
+
     return (dispatch: Dispatch) => {
-        authAPI.me()
+        return authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
+                    console.log(data.data)
                     dispatch(setAuthUserDataAC(id, email, login, true));
                     profileAPI.getProfile(id)
                         .then(response => {
@@ -69,6 +71,7 @@ export const getAuthThunkCreator = () => {
                 }
 
             })
+        
     }
 }
 
@@ -78,7 +81,7 @@ export const loginUserThunkCreator = (email: string, password: string, rememberM
         authAPI.login(email, password, rememberMe)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    dispatch(getAuthThunkCreator())
+                    dispatch(getAuthUserDataThunkCreator())
                 } else {
                     let message = data.messages.length > 0 && data.messages
                     dispatch(stopSubmit('loginForm', {_error: message}))

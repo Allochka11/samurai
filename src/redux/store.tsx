@@ -11,6 +11,7 @@ import {
     unfollowSuccess
 } from "./users-reducer";
 import {setAuthUserDataAC, setUserAvatarAC} from "./auth-reducer";
+import {initializedSuccess} from "./appReducer";
 
 type MessagesPropsType = {
     id: number
@@ -115,7 +116,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserAvatarAC> |
     ReturnType<typeof toggleIsFollowingProgressAC> |
     ReturnType<typeof setProfileStatus> |
-    ReturnType<typeof updateProfileStatus>
+    ReturnType<typeof updateProfileStatus> |
+    ReturnType<typeof initializedSuccess>
 
 
 // let store: StoreType = {
