@@ -5,6 +5,7 @@ import {stopSubmit} from "redux-form";
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {AppRootStateType} from "./redux-store";
+import {Redirect} from "react-router-dom";
 
 
 export const SET_USER_DATA = "SET_USER_DATA";
@@ -61,17 +62,17 @@ export const getAuthUserDataThunkCreator = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
-                    console.log(data.data)
+                    // debugger
+                    // console.log(data.data)
                     dispatch(setAuthUserDataAC(id, email, login, true));
                     profileAPI.getProfile(id)
                         .then(response => {
                             dispatch(setUserAvatarAC(response.data.photos.small));
                         })
-
                 }
 
             })
-        
+
     }
 }
 
@@ -96,6 +97,7 @@ export const logoutUserThunkCreator = () => {
             .then((data) => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserDataAC(null, null, null, false));
+                    // return <Redirect to={'/login'}/>
                 } else {
                     console.log('unauthorized')
                 }

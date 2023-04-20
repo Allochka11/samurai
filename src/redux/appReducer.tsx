@@ -1,9 +1,6 @@
 import {ActionsTypes} from "./store";
-import {Dispatch} from "redux";
-import {authAPI, profileAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {AnyAction, Dispatch} from "redux";
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import {AppRootStateType} from "./redux-store";
 import {getAuthUserDataThunkCreator} from "./auth-reducer";
 
@@ -18,7 +15,6 @@ type AuthPropsType = {
 
 let initialState: AuthPropsType = {
     initialized: false
-
 }
 
 export const appReducer = (state: AuthPropsType = initialState, action: ActionsTypes): AuthPropsType => {
@@ -42,6 +38,7 @@ export const initializeAppThunkCreator = (): AppThunk => (dispatch: AppDispatch)
 
     dispatch(getAuthUserDataThunkCreator())
         .then(() => {
+
             dispatch(initializedSuccess())
         });
 

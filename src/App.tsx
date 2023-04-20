@@ -18,26 +18,30 @@ type MapDispatchToPropsType = {
     initializeAppThunkCreator: () => void
 }
 
-type MapStateToProps = {
+type MapStateToPropsType = {
     initialized: boolean
 }
 
-type AppType = MapStateToProps & MapDispatchToPropsType
+type AppType = MapStateToPropsType & MapDispatchToPropsType
 
 
 class App extends React.Component<AppType> {
     componentDidMount() {
         this.props.initializeAppThunkCreator();
         console.log(this.props.initialized)
+
+        // console.log(this.props.initialized)
     }
 
 
     render() {
-        if (!this.props.initialized)
+        if (!this.props.initialized) {
+            console.log(this.props.initialized)
             return <Preloader/>
-
+        }
         return (
             <div className={s.wrapper}>
+
                 <div className={s.wrapper__container}>
                     <div className={s.content}>
                         <HeaderContainer/>
@@ -67,7 +71,7 @@ class App extends React.Component<AppType> {
     }
 }
 
-const mapStateToProps = (state: AppRootStateType) => ({
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
     initialized: state.appReducer.initialized
 })
 

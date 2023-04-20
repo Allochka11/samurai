@@ -11,6 +11,8 @@ import {
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router';
 import {compose} from "redux";
+import Login from "../Login/Login";
+import {Redirect} from "react-router-dom";
 
 
 type MapStatePropsType = {
@@ -40,27 +42,37 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         // console.log(this.props.isAuth)
         // console.log(this.props.authorisedUserId)
-        let userId = this.props.match.params.userId;
+        // let userId = this.props.match.params.userId;
+        // if (!userId) {
+        //     // debugger
+        //     userId = String(this.props.authorisedUserId);
+        //     if (!userId) {
+        //         this.props.history.push("/login");
+        //     }
+        // } else {
+        //     this.props.profileThunkCreator(userId)
+        //     this.props.getProfileStatusThunkCreator(userId)
+        // }
 
-        if (!userId) {
-            // debugger
-            userId = String(26074)
-        }
+        // debugger
+        let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
+
         this.props.profileThunkCreator(userId)
         this.props.getProfileStatusThunkCreator(userId)
     }
 
 
     render() {
-        // if (!this.props.isAuth) return <Redirect to={'/login'}/>
+        if (!this.props.authorisedUserId && !this.props.match.params.userId) {
+            // return <Redirect to={'/login'}/>
+            return <Login/>
+        }
         return (
             <div>
                 <Profile {...this.props} setUserProfile={this.props.setUserProfile}
                          profile={this.props.profile}
                          status={this.props.status}
                          updateStatus={this.props.updateStatus}
-
-
                 />
             </div>
         );
