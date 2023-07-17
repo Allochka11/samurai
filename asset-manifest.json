@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/samurai/static/css/main.20785d81.css",
+    "main.js": "/samurai/static/js/main.1bc3e0c6.js",
+    "static/js/787.28cb0dcd.chunk.js": "/samurai/static/js/787.28cb0dcd.chunk.js",
+    "static/media/user.png": "/samurai/static/media/user.f86b25f4a759162ecdb3.png",
+    "static/media/Spinner-1.4s-200px.svg": "/samurai/static/media/Spinner-1.4s-200px.b9a9d3b5edcbafa5ba4ce7d10b72dd0b.svg",
+    "static/media/instagram.svg": "/samurai/static/media/instagram.5b3a03f85d2741db18a82294547ba599.svg",
+    "static/media/twitter.svg": "/samurai/static/media/twitter.a134e7797281c92aa55aeb7c93e8a6ce.svg",
+    "static/media/youtube.svg": "/samurai/static/media/youtube.32d95c8d3ccf859b2c3dc9315b7786ca.svg",
+    "static/media/github.svg": "/samurai/static/media/github.b92a4d73a35c58a3cece1abc5c713a77.svg",
+    "index.html": "/samurai/index.html",
+    "static/media/facebook.svg": "/samurai/static/media/facebook.13aa0acfc52eb382665ff1e8737d69fc.svg",
+    "main.20785d81.css.map": "/samurai/static/css/main.20785d81.css.map",
+    "main.1bc3e0c6.js.map": "/samurai/static/js/main.1bc3e0c6.js.map",
+    "787.28cb0dcd.chunk.js.map": "/samurai/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.20785d81.css",
+    "static/js/main.1bc3e0c6.js"
+  ]
+}
