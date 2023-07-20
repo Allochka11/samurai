@@ -29,14 +29,13 @@ type AppType = MapStateToPropsType & MapDispatchToPropsType
 class App extends React.Component<AppType> {
     componentDidMount() {
         this.props.initializeAppThunkCreator();
-        console.log(this.props.initialized)
+        // console.log(this.props.initialized)
     }
 
 
     render() {
-        debugger
         if (!this.props.initialized) {
-            console.log(this.props.initialized)
+            // console.log(this.props.initialized)
             return <Preloader/>
         }
         return (
