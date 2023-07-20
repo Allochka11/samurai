@@ -7,30 +7,20 @@ import {connect} from "react-redux";
 
 type MapStatePropsType = {
     postData: PostDataPropsType[]
-    // newPostText: string
-
 }
 type MapDispatchPropsType = {
-    // updateNewPostText: (text: string) => void
     addPost: (newPostText: string) => void
-
 }
 
 export type PostsPropsTypes = MapStatePropsType & MapDispatchPropsType
 
-
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     return {
         postData: state.profileReducer.postData,
-        // newPostText: state.profileReducer.newPostText
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        // updateNewPostText: (text: string) => {
-        //     let action = onPostChangeActionCreator(text);
-        //     dispatch(action);
-        // },
         addPost: (newPostText) => {
             dispatch(addPostActionCreator(newPostText))
         }

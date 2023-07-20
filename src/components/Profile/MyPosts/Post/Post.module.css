@@ -1,5 +1,20 @@
 .posts__items {
     line-height: 1.5;
 }
-.posts__img {width: 50px;height: 50px; border-radius: 50%}
-.posts__text {}
+
+.posts__img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.post__text {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.text {
+    font-size: 20px;
+}

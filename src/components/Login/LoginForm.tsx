@@ -12,31 +12,44 @@ export type FormDataType = {
 }
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <form action="" onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'email'}
-                       name={'email'}
-                       component={Input}
-                       validate={[required]}
-                       type={'input'}
-                />
-            </div>
-            <div>
-                <Field placeholder={'password'}
-                       name={'password'}
-                       component={Input}
-                       validate={[required]}
-                       type={'input'}/>
-            </div>
-            <div>
-                <Field type="checkbox" name={'rememberMe'} component={'input'}/>
-            </div>
+        <>
+            <p>
+                To log in get registered{" "}
+                <a href={"https://social-network.samuraijs.com/"} target={"_blank"}>
+                    here
+                </a>
+            </p>
+            <p>or use common test account credentials:</p>
+            <p> Email: free@samuraijs.com</p>
+            <p>Password: free</p>
 
-            {props.error && <div className={s.fieldSummaryError}>{props.error}</div>}
-            <div>
-                <button type={'submit'}>Submit</button>
-            </div>
-        </form>
+            <form action="" onSubmit={props.handleSubmit}>
+                <div>
+                    <Field placeholder={'email'}
+                           name={'email'}
+                           component={Input}
+                           validate={[required]}
+                           type={'input'}
+                    />
+                </div>
+                <div>
+                    <Field placeholder={'password'}
+                           name={'password'}
+                           component={Input}
+                           validate={[required]}
+                           type={'input'}/>
+                </div>
+                <div>
+                    <Field type="checkbox" name={'rememberMe'} component={'input'}/>
+                </div>
+
+                {props.error && <div className={s.fieldSummaryError}>{props.error}</div>}
+                <div>
+                    <button type={'submit'}>Submit</button>
+                </div>
+            </form>
+        </>
+
     );
 };
 

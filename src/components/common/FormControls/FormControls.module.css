@@ -1,7 +1,6 @@
 
 .formControl, .formControl:active {
-    /*border: 1px solid black;*/
-    /*outline: none;*/
+
 }
 
 .formControl.error input, .formControl.error textarea {
@@ -15,6 +14,7 @@
 }
 
 .fieldSummaryError {
+    font-size: 14px;
     border: 1px solid red;
     color: #ce8888;
     padding: 5px;

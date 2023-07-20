@@ -14,6 +14,7 @@ import {initializeAppThunkCreator} from "./redux/appReducer";
 import {AppRootStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
+
 type MapDispatchToPropsType = {
     initializeAppThunkCreator: () => void
 }
@@ -29,46 +30,41 @@ class App extends React.Component<AppType> {
     componentDidMount() {
         this.props.initializeAppThunkCreator();
         console.log(this.props.initialized)
-
-        // console.log(this.props.initialized)
     }
 
 
     render() {
+        debugger
         if (!this.props.initialized) {
             console.log(this.props.initialized)
             return <Preloader/>
         }
         return (
-            <div className={s.wrapper}>
+            <div className={s.content}>
+                <HeaderContainer/>
 
-                <div className={s.wrapper__container}>
-                    <div className={s.content}>
-                        <HeaderContainer/>
-                        <div className={s.content__container}>
+                <div className={s.content__container}>
+                    <Navbar/>
+                    <div className={s.content__right}>
+                        <Switch>
+                            <Route path="/dialogs"
+                                   render={() => <DialogsContainer/>
+                                   }/>
+                            <Route path="/profile/:userId?"
+                                   render={() => <ProfileContainer/>
+                                   }/>
+                            <Route path="/users"
+                                   render={() => <UsersContainer/>}/>
+                            <Route path="/login"
+                                   render={() => <Login/>}/>
 
-                            <Navbar/>
-                            <div className={s.content__right}>
-                                <Switch>
-                                    <Route path="/dialogs"
-                                           render={() => <DialogsContainer/>
-                                           }/>
-                                    <Route path="/profile/:userId?"
-                                           render={() => <ProfileContainer/>
-                                           }/>
-                                    <Route path="/users"
-                                           render={() => <UsersContainer/>}/>
-                                    <Route path="/login"
-                                           render={() => <Login/>}/>
-
-                                </Switch>
-                            </div>
-                        </div>
+                        </Switch>
                     </div>
                 </div>
             </div>
         );
     }
+
 }
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({

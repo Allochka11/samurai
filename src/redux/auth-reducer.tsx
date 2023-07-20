@@ -57,12 +57,13 @@ export let setUserAvatarAC = (avatar: string) => ({
 
 export const getAuthUserDataThunkCreator = () => {
 
+
     return (dispatch: Dispatch) => {
         return authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
-                    // debugger
+
                     // console.log(data.data)
                     dispatch(setAuthUserDataAC(id, email, login, true));
                     profileAPI.getProfile(id)
@@ -79,6 +80,7 @@ export const getAuthUserDataThunkCreator = () => {
 export const loginUserThunkCreator = (email: string, password: string, rememberMe: boolean): AppThunk => {
 
     return (dispatch: AppDispatch) => {
+
         authAPI.login(email, password, rememberMe)
             .then((data) => {
                 if (data.resultCode === 0) {

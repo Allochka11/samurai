@@ -1,6 +1,4 @@
-import React, {ChangeEventHandler} from "react";
-import {profileAPI} from "../../../../api/api";
-import {updateStatus} from "../../../../redux/profile-reducer";
+import React from "react";
 
 type ProfileStatusType = {
     status: string

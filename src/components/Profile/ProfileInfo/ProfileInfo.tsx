@@ -17,6 +17,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
     if (!props.profile) {
         return <div><Preloader/>
+
             <div>User not found</div>
         </div>
     }
