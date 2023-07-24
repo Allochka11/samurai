@@ -15,6 +15,7 @@ function Header(props: HeaderPropsType) {
     let handlerLogout = () => {
         props.logoutUserThunkCreator()
     }
+    
     return (
         <>
             <div className={s.header}>
@@ -26,7 +27,7 @@ function Header(props: HeaderPropsType) {
                     <div className={s.loginBlock}>
 
                         {props.isAuth
-                            ?
+                            &&
                             <div className={s.loginAndAvatar}>
 
                                 <Avatar alt="Remy Sharp" src={props.avatar !== null ? props.avatar : user}
@@ -34,11 +35,6 @@ function Header(props: HeaderPropsType) {
                                 <Button variant="outlined" style={{color: 'white'}}
                                         onClick={handlerLogout}>Logout</Button>
                             </div>
-                            //
-                            : <Button variant="outlined" style={{color: 'white'}}
-                                      onClick={handlerLogout} href={'login'}> Login
-                            </Button>
-                            // : <NavLink to={'login'} className={s.loginText}>Login</NavLink>
                         }
                     </div>
                 </div>

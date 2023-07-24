@@ -1,11 +1,9 @@
 import {ActionsTypes} from "./store";
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {authAPI, profileAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import {AppRootStateType} from "./redux-store";
-import {Redirect} from "react-router-dom";
 
 
 export const SET_USER_DATA = "SET_USER_DATA";
@@ -55,27 +53,21 @@ export let setUserAvatarAC = (avatar: string) => ({
 }) as const;
 
 
-export const getAuthUserDataThunkCreator = () => {
-
-
-    return (dispatch: Dispatch) => {
+export const getAuthUserDataThunkCreator = () =>
+    (dispatch: Dispatch) => {
         return authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
-
-                    // console.log(data.data)
                     dispatch(setAuthUserDataAC(id, email, login, true));
-                    profileAPI.getProfile(id)
-                        .then(response => {
-                            dispatch(setUserAvatarAC(response.data.photos.small));
-                        })
+                    // dispatch(setUserAvatarAC(response.data.photos.small));
+                    profileAPI.getProfile(id);
+                } else {
+                    return console.warn('me is undefined')
                 }
-
             })
-
     }
-}
+
 
 export const loginUserThunkCreator = (email: string, password: string, rememberMe: boolean): AppThunk => {
 
@@ -99,6 +91,7 @@ export const logoutUserThunkCreator = () => {
             .then((data) => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthUserDataAC(null, null, null, false));
+
                     // return <Redirect to={'/login'}/>
                 } else {
                     console.log('unauthorized')

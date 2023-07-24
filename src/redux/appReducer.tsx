@@ -20,6 +20,7 @@ let initialState: AuthPropsType = {
 export const appReducer = (state: AuthPropsType = initialState, action: ActionsTypes): AuthPropsType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS : {
+            // debugger
             return {
                 ...state,
                 initialized: true
@@ -30,14 +31,13 @@ export const appReducer = (state: AuthPropsType = initialState, action: ActionsT
     }
 }
 
-export let initializedSuccess = () => ({
-    type: INITIALIZED_SUCCESS
-}) as const;
+export let initializedSuccess = () => ({type: INITIALIZED_SUCCESS}) as const;
 
 export const initializeAppThunkCreator = (): AppThunk => (dispatch: AppDispatch) => {
 
     dispatch(getAuthUserDataThunkCreator())
-        .then(() => {
+
+        .then((res) => {
 
             dispatch(initializedSuccess())
         });

@@ -13,6 +13,7 @@ import {RouteComponentProps, withRouter} from 'react-router';
 import {compose} from "redux";
 import Login from "../Login/Login";
 import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type MapStatePropsType = {
@@ -44,7 +45,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         // console.log(this.props.authorisedUserId)
         // let userId = this.props.match.params.userId;
         // if (!userId) {
-        //     // debugger
+        //     debugger
         //     userId = String(this.props.authorisedUserId);
         //     if (!userId) {
         //         this.props.history.push("/login");
@@ -93,7 +94,7 @@ export default compose<React.FC>(
             getProfileStatusThunkCreator, updateStatus
         }),
     withRouter,
-    // withAuthRedirect
+    withAuthRedirect
 )(ProfileContainer);
 
 // let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
