@@ -17,6 +17,7 @@ type MapDispatchType = {
 const Login = (props: LoginType & MapDispatchType) => {
     let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth)
     let onSubmit = (formData: FormDataType) => {
+        console.log(formData)
         let {email, password, rememberMe} = formData;
         props.loginUserThunkCreator(email, password, rememberMe)
     }

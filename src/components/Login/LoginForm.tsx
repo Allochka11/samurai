@@ -45,7 +45,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
                 {props.error && <div className={s.fieldSummaryError}>{props.error}</div>}
                 <div>
-                    <button type={'submit'}>Submit</button>
+                    <button type={'submit'} name={'submit'}>Submit</button>
                 </div>
             </form>
         </>

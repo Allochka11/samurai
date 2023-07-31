@@ -7,7 +7,7 @@ const FormControl = (props: any) => {
     const {input, meta, child, placeholder, ...restProps} = props
 
     let hasError = meta.touched && meta.error;
-    // console.log(props.type)
+
     return (
         <div className={s.formControl + ' ' + (hasError ? s.error : ' ')}>
             <div>{props.children}</div>

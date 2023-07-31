@@ -11,6 +11,7 @@ import inst from '../../../assets/socialMediaIcons/instagram.svg';
 import gh from '../../../assets/socialMediaIcons/github.svg';
 import youtube from '../../../assets/socialMediaIcons/youtube.svg';
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
@@ -21,6 +22,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
             <div>User not found</div>
         </div>
     }
+    // @ts-ignore
+    // @ts-ignore
     return (
         <div>
             {/*<div className={s.profile__header}>*/}
@@ -33,10 +36,12 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                 <div>
                     <div className={s.profile__name}>{props.profile.fullName}</div>
                     <div className={s.aboutMe}>{props.profile.aboutMe}</div>
-                    <ProfileStatus status={props.status}
-                                   userId={props.profile.userId}
-                                   updateStatus={props.updateStatus}
-                    />
+                    {/*<ProfileStatus status={props.status}*/}
+                    {/*               userId={props.profile.userId}*/}
+                    {/*               updateStatus={props.updateStatus}*/}
+                    {/*/>*/}
+                    <ProfileStatusWithHooks status={props.status} userId={props.profile.userId}
+                                            updateStatus={props.updateStatus}/>
                     {/*<div className={s.aboutMe}> </div>*/}
                 </div>
             </div>

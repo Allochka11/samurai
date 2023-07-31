@@ -57,13 +57,14 @@ export const getAuthUserDataThunkCreator = () =>
     (dispatch: Dispatch) => {
         return authAPI.me()
             .then(data => {
+                console.log(data)
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
                     dispatch(setAuthUserDataAC(id, email, login, true));
                     // dispatch(setUserAvatarAC(response.data.photos.small));
                     profileAPI.getProfile(id);
                 } else {
-                    return console.warn('me is undefined')
+                    // return console.warn('me is undefined')?
                 }
             })
     }
