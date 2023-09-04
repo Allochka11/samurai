@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileType} from "../../redux/profile-reducer";
+import {ProfileType} from "redux/profile-reducer";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
+import {AppRootStateType} from "redux/redux-store";
 import {LoginReduxForm} from "../../components/Login/LoginForm";
 
 export type ProfilePropsType = {
@@ -14,7 +14,7 @@ export type ProfilePropsType = {
     updateStatus: (status: string) => void
 }
 
-function Profile(props: ProfilePropsType) {
+function Profile1(props: ProfilePropsType) {
     let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth)
 
 
@@ -34,4 +34,6 @@ function Profile(props: ProfilePropsType) {
     )
 }
 
-export default Profile;
+export default Profile1;
+
+export const Profile = React.memo(Profile1)

@@ -5,24 +5,28 @@ import {PostsPropsTypes} from "./MyPostsContainer";
 import {AddPostReduxForm, PostFormDataType} from "./Post/AddPostForm";
 
 
-function MyPosts(props: PostsPropsTypes) {
+class MyPosts extends React.Component<PostsPropsTypes> {
+    render() {
+        console.log('Posts')
 
-    let postsElements = props.postData.map((el) => <Post key={el.id} id={el.id} message={el.message}
-                                                         likesCount={el.likesCount}/>)
+        let postsElements = [...this.props.postData].reverse().map((el) => <Post key={el.id} id={el.id}
+                                                                                 message={el.message}
+                                                                                 likesCount={el.likesCount}/>)
 
-    let onSubmit = (formData: PostFormDataType) => {
-        props.addPost(formData.newPostText);
-    }
-    return (
-        <div className={s.posts}>
-            <div className={s.posts__container}>
+        let onSubmit = (formData: PostFormDataType) => {
+            this.props.addPost(formData.newPostText);
+        }
+        return (
+            <div className={s.posts}>
+                <div className={s.posts__container}>
 
-                <AddPostReduxForm onSubmit={onSubmit}/>
-                <h3>Posts:</h3>
-                {postsElements}
+                    <AddPostReduxForm onSubmit={onSubmit}/>
+                    <h3>Posts:</h3>
+                    {postsElements}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default MyPosts;

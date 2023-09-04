@@ -57,7 +57,7 @@ export const getAuthUserDataThunkCreator = () =>
     (dispatch: Dispatch) => {
         return authAPI.me()
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
                     dispatch(setAuthUserDataAC(id, email, login, true));

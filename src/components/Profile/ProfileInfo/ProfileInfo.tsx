@@ -22,14 +22,9 @@ export const ProfileInfo = (props: ProfilePropsType) => {
             <div>User not found</div>
         </div>
     }
-    // @ts-ignore
-    // @ts-ignore
+
     return (
         <div>
-            {/*<div className={s.profile__header}>*/}
-            {/*    <img src={props.profile.lookingForAJob ? lookingForAJob : haveJob}*/}
-            {/*         className={s.header}/>*/}
-            {/*</div>*/}
             <div className={s.profile__main}>
                 <img src={props.profile.photos?.small ? props.profile.photos.small : user} alt="avatar"
                      className={s.profile__avatar}/>
