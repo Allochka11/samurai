@@ -1,4 +1,10 @@
-import {addPostActionCreator, setProfileStatus, setUserProfile, updateProfileStatus} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    deletePostAC,
+    setProfileStatus,
+    setUserProfile,
+    updateProfileStatus
+} from "./profile-reducer";
 import {sendMessageActionCreator} from "./message-reducer";
 import {AppStoreType} from "./redux-store";
 import {
@@ -117,5 +123,6 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof toggleIsFollowingProgressAC> |
     ReturnType<typeof setProfileStatus> |
     ReturnType<typeof updateProfileStatus> |
-    ReturnType<typeof initializedSuccess>
+    ReturnType<typeof initializedSuccess> |
+    ReturnType<typeof deletePostAC>
 

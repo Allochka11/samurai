@@ -1,8 +1,10 @@
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import * as console from "console";
 
 export const ADD_POST = "ADD-POST";
+export const DELETE_POST = "DELETE_POST";
 // export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_PROFILE_STATUS = "SET_PROFILE_STATUS";
@@ -69,6 +71,9 @@ export const profileReducer = (state: ProfilePagePropsType = initialState, actio
                 // newPostText: ''
             };
         }
+        case DELETE_POST: {
+            return {...state, postData: state.postData.filter(el => el.id !== action.id)}
+        }
         // case UPDATE_NEW_POST_TEXT: {
         //     return {...state, newPostText: action.newText}
         // }
@@ -91,6 +96,7 @@ export let addPostActionCreator = (newPostText: string) => ({type: ADD_POST, new
 //     type: UPDATE_NEW_POST_TEXT,
 //     newText: newText
 // }) as const
+export let deletePostAC = (id: number) => ({type: DELETE_POST, id}) as const
 
 
 export let setUserProfile = (profile: ProfileType) => ({
@@ -134,4 +140,8 @@ export const updateStatus = (status: string) => {
             })
     }
 }
+
+// export const deletePostTC = (id: number) => (dispatch: Dispatch) => {
+//     profileAPI.getProfile()
+// }
 
