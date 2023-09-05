@@ -36,20 +36,6 @@ export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsTyp
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
   componentDidMount() {
-    // console.log(this.props.isAuth)
-    // console.log(this.props.authorisedUserId)
-    // let userId = this.props.match.params.userId;
-    // if (!userId) {
-    //     debugger
-    //     userId = String(this.props.authorisedUserId);
-    //     if (!userId) {
-    //         this.props.history.push("/login");
-    //     }
-    // } else {
-    //     this.props.profileThunkCreator(userId)
-    //     this.props.getProfileStatusThunkCreator(userId)
-    // }
-
     let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
 
     this.props.profileThunkCreator(userId);
@@ -92,11 +78,3 @@ export default compose<React.FC>(
   withRouter,
   withAuthRedirect,
 )(ProfileContainer);
-
-// let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
-// let A = withAuthRedirect(ProfileContainer)
-
-// export default compose<React.Component>(withAuthRedirect(withRouter(connect(mapStateToProps, {
-//     setUserProfile,
-//     profileThunkCreator
-// }))(ProfileContainer)));

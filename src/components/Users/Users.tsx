@@ -1,74 +1,36 @@
 import React from "react";
-import s from "./Users.module.css";
-import userPhoto from "../../assets/images/user.png";
-import {UsersPropsType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
+import { UsersPropsType } from "redux/users-reducer";
+import { Paginator } from "components/common/Paginator/Paginator";
+import { User } from "components/Users/User";
 
-type UsersType = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onClickPageHandler: (p: number) => void
-    users: UsersPropsType[]
-    followingInProgress: []
-    followThunkCreator: (userId: number) => void
-    unfollowThunkCreator: (userId: number) => void
-}
+export type UsersType = {
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  onClickPageHandler: (p: number) => void;
+  users: UsersPropsType[];
+  followingInProgress: [];
+  followThunkCreator: (userId: number) => void;
+  unfollowThunkCreator: (userId: number) => void;
+};
 
-
-export const Users = (props: UsersType) => {
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
-    return <div>
-        <div>
-            {pages.map(p => {
-                return <span key={p} className={props.currentPage === p ? s.selectedPage : s.pagination}
-                             onClick={() => props.onClickPageHandler(p)}>
-                        {p}
-                    </span>
-            })}
-
-
-        </div>
-        {props.users.map((el) => (<div key={el.id}>
-                <span>
-                    <div>
-                        <NavLink to={'/profile/' + el.id} key={el.id}>
-                            <img src={el.photos.small !== null ? el.photos.small : userPhoto} alt=""
-                                 className={s.userPhoto}/>
-                        </NavLink>
-
-                    </div>
-                    <div>
-                        {el.followed
-                            ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                                props.unfollowThunkCreator(el.id)
-                            }}>Unfollow</button>
-
-                            : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                                props.followThunkCreator(el.id)
-                            }
-                            }>Follow</button>
-                        }
-                    </div>
-                </span>
-            <span>
-                    <span>
-                    <div>{el.name}</div>
-                    <div>{el.status}</div>
-                </span>
-                <span>
-                    <div>{'el.location.city'}</div>
-                    <div>{'el.location.country'}</div>
-                </span>
-                </span>
-        </div>))}
+export const Users = ({ currentPage, totalUsersCount, pageSize, onClickPageHandler, ...props }: UsersType) => {
+  return (
+    <div>
+      <Paginator
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onClickPageHandler={onClickPageHandler}
+      />
+      {props.users.map((el) => (
+        <User
+          user={el}
+          followingInProgress={props.followingInProgress}
+          followThunkCreator={props.followThunkCreator}
+          unfollowThunkCreator={props.unfollowThunkCreator}
+        />
+      ))}
     </div>
-
-}
+  );
+};
