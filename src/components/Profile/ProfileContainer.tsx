@@ -1,100 +1,96 @@
-import React from 'react';
+import React from "react";
 import Profile from "./Profile";
-import {connect} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
+import { connect } from "react-redux";
+import { AppRootStateType } from "redux/redux-store";
 import {
-    getProfileStatusThunkCreator,
-    profileThunkCreator,
-    ProfileType,
-    setUserProfile,
-    updateStatus
-} from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from 'react-router';
-import {compose} from "redux";
+  getProfileStatusThunkCreator,
+  profileThunkCreator,
+  ProfileType,
+  setUserProfile,
+  updateStatus,
+} from "redux/profile-reducer";
+import { RouteComponentProps, withRouter } from "react-router";
+import { compose } from "redux";
 import Login from "../Login/Login";
-import {Redirect} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-
+import { withAuthRedirect } from "hoc/withAuthRedirect";
 
 type MapStatePropsType = {
-    profile: ProfileType | null
-    status: string
-    authorisedUserId: number | null
-    isAuth: boolean
-}
+  profile: ProfileType | null;
+  status: string;
+  authorisedUserId: number | null;
+  isAuth: boolean;
+};
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: ProfileType) => void
-    profileThunkCreator: (userId: string) => void
-    getProfileStatusThunkCreator: (userId: string) => void
-    updateStatus: (status: string) => void
-}
+  setUserProfile: (profile: ProfileType) => void;
+  profileThunkCreator: (userId: string) => void;
+  getProfileStatusThunkCreator: (userId: string) => void;
+  updateStatus: (status: string) => void;
+};
 type PathParamsType = {
-    userId: string
-}
+  userId: string;
+};
 export type OwnPropsType = MapStatePropsType & MapDispatchPropsType;
 
 export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsType;
 
-
 class ProfileContainer extends React.Component<ProfilePropsType> {
+  componentDidMount() {
+    // console.log(this.props.isAuth)
+    // console.log(this.props.authorisedUserId)
+    // let userId = this.props.match.params.userId;
+    // if (!userId) {
+    //     debugger
+    //     userId = String(this.props.authorisedUserId);
+    //     if (!userId) {
+    //         this.props.history.push("/login");
+    //     }
+    // } else {
+    //     this.props.profileThunkCreator(userId)
+    //     this.props.getProfileStatusThunkCreator(userId)
+    // }
 
+    let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
 
-    componentDidMount() {
-        // console.log(this.props.isAuth)
-        // console.log(this.props.authorisedUserId)
-        // let userId = this.props.match.params.userId;
-        // if (!userId) {
-        //     debugger
-        //     userId = String(this.props.authorisedUserId);
-        //     if (!userId) {
-        //         this.props.history.push("/login");
-        //     }
-        // } else {
-        //     this.props.profileThunkCreator(userId)
-        //     this.props.getProfileStatusThunkCreator(userId)
-        // }
+    this.props.profileThunkCreator(userId);
+    this.props.getProfileStatusThunkCreator(userId);
+  }
 
-        // debugger
-        let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
-
-        this.props.profileThunkCreator(userId)
-        this.props.getProfileStatusThunkCreator(userId)
+  render() {
+    if (!this.props.authorisedUserId && !this.props.match.params.userId) {
+      // return <Redirect to={'/login'}/>
+      return <Login />;
     }
-
-
-    render() {
-        if (!this.props.authorisedUserId && !this.props.match.params.userId) {
-            // return <Redirect to={'/login'}/>
-            return <Login/>
-        }
-        return (
-            <div>
-                <Profile {...this.props} setUserProfile={this.props.setUserProfile}
-                         profile={this.props.profile}
-                         status={this.props.status}
-                         updateStatus={this.props.updateStatus}
-                />
-            </div>
-        );
-    }
+    return (
+      <div>
+        <Profile
+          {...this.props}
+          setUserProfile={this.props.setUserProfile}
+          profile={this.props.profile}
+          status={this.props.status}
+          updateStatus={this.props.updateStatus}
+        />
+      </div>
+    );
+  }
 }
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
-    profile: state.profileReducer.profile,
-    status: state.profileReducer.status,
-    authorisedUserId: state.auth.id,
-    isAuth: state.auth.isAuth
-})
+  profile: state.profileReducer.profile,
+  status: state.profileReducer.status,
+  authorisedUserId: state.auth.id,
+  isAuth: state.auth.isAuth,
+});
 
 export default compose<React.FC>(
-    connect(mapStateToProps,
-        {
-            setUserProfile, profileThunkCreator,
-            getProfileStatusThunkCreator, updateStatus
-        }),
-    withRouter,
-    withAuthRedirect
+  connect(mapStateToProps, {
+    setUserProfile,
+    profileThunkCreator,
+    getProfileStatusThunkCreator,
+    updateStatus,
+  }),
+  withRouter,
+  withAuthRedirect,
 )(ProfileContainer);
 
 // let ProfileContainerRouter = withRouter(withAuthRedirect(ProfileContainer))
