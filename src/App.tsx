@@ -1,17 +1,17 @@
 import React from "react";
 import s from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { DialogsContainer } from "components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router";
 import { initializeAppThunkCreator } from "redux/appReducer";
-import { AppRootStateType } from "redux/redux-store";
+import store, { AppRootStateType } from "redux/redux-store";
 import { Preloader } from "components/common/Preloader/Preloader";
 
 type MapDispatchToPropsType = {
@@ -57,4 +57,17 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
   initialized: state.appReducer.initialized,
 });
 
-export default compose<React.FC>(withRouter, connect(mapStateToProps, { initializeAppThunkCreator }))(App);
+const AppWithRouter = compose<React.FC>(withRouter, connect(mapStateToProps, { initializeAppThunkCreator }))(App);
+
+//for App.test
+const SamuraiApp = () => {
+  return (
+    <HashRouter>
+      <Provider store={store}>
+        <AppWithRouter />
+      </Provider>
+    </HashRouter>
+  );
+};
+
+export default SamuraiApp;

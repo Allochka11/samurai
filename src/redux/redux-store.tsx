@@ -1,4 +1,4 @@
-import { applyMiddleware, legacy_createStore as createStore } from "redux";
+import { applyMiddleware, compose, legacy_createStore as createStore } from "redux";
 import { combineReducers } from "redux";
 import { profileReducer } from "./profile-reducer";
 import { messageReducer } from "./message-reducer";
@@ -18,8 +18,13 @@ let rootReducer = combineReducers({
   appReducer: appReducer,
   form: formReducer,
 });
+// @ts-ignore
+const composeEnhancers = (window["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] as typeof compose) || compose;
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
 (window as any).store = store;
 
 export type AppStoreType = typeof store;

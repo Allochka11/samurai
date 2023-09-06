@@ -25,6 +25,7 @@ export const Users = ({ currentPage, totalUsersCount, pageSize, onClickPageHandl
       />
       {props.users.map((el) => (
         <User
+          key={el.id}
           user={el}
           followingInProgress={props.followingInProgress}
           followThunkCreator={props.followThunkCreator}
