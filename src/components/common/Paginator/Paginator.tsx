@@ -1,15 +1,16 @@
 import React from "react";
 import s from "./Paginator.module.css";
+import { Pagination } from "@mui/material";
 
 type UsersType = {
-  totalUsersCount: number;
+  totalItemsCount: number;
   pageSize: number;
   currentPage: number;
   onClickPageHandler: (p: number) => void;
 };
 
-export const Paginator = ({ currentPage, totalUsersCount, pageSize, onClickPageHandler, ...props }: UsersType) => {
-  let pagesCount = Math.ceil(totalUsersCount / pageSize);
+export const Paginator = ({ currentPage, totalItemsCount, pageSize, onClickPageHandler, ...props }: UsersType) => {
+  let pagesCount = Math.ceil(totalItemsCount / pageSize);
   let pages = [];
 
   for (let i = 1; i <= pagesCount; i++) {
@@ -18,17 +19,15 @@ export const Paginator = ({ currentPage, totalUsersCount, pageSize, onClickPageH
 
   return (
     <div>
-      {pages.map((p) => {
-        return (
-          <span
-            key={p}
-            className={currentPage === p ? s.selectedPage : s.pagination}
-            onClick={() => onClickPageHandler(p)}
-          >
-            {p}
-          </span>
-        );
-      })}
+      <Pagination
+        count={pagesCount}
+        page={currentPage}
+        onChange={(event, page) => {
+          onClickPageHandler(page);
+        }}
+        variant="outlined"
+        color="secondary"
+      />
     </div>
   );
 };

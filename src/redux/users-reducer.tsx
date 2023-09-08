@@ -39,7 +39,7 @@ export type UsersPagePropsType = {
 
 let initialState: UsersPagePropsType = {
   users: [],
-  totalUsersCount: 100,
+  totalUsersCount: 200,
   pageSize: 10,
   currentPage: 1,
   isFetching: false,
@@ -105,12 +105,14 @@ export let toggleIsFollowingProgressAC = (isInProgress: boolean, userId: number)
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
   return async (dispatch: Dispatch) => {
-    dispatch(toggleIsFetching(true));
+    // dispatch(toggleIsFetching(true));
     try {
       let data = await usersAPI.getUsers(currentPage, pageSize);
       dispatch(setUsers(data.items));
       dispatch(toggleIsFetching(false));
-    } catch (e) {}
+    } catch (e) {
+      dispatch(toggleIsFetching(true));
+    }
   };
 };
 const followUnfollowFlow = async (

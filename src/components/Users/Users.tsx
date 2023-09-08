@@ -2,9 +2,10 @@ import React from "react";
 import { UsersPropsType } from "redux/users-reducer";
 import { Paginator } from "components/common/Paginator/Paginator";
 import { User } from "components/Users/User";
+import { PaginatorMadeMyself } from "components/common/Paginator/PaginatorMadeMyself";
 
 export type UsersType = {
-  totalUsersCount: number;
+  totalItemsCount: number;
   pageSize: number;
   currentPage: number;
   onClickPageHandler: (p: number) => void;
@@ -12,13 +13,21 @@ export type UsersType = {
   followingInProgress: [];
   followThunkCreator: (userId: number) => void;
   unfollowThunkCreator: (userId: number) => void;
+  portionSize: number;
 };
 
-export const Users = ({ currentPage, totalUsersCount, pageSize, onClickPageHandler, ...props }: UsersType) => {
+export const Users = ({
+  currentPage,
+  totalItemsCount,
+  pageSize,
+  onClickPageHandler,
+  portionSize,
+  ...props
+}: UsersType) => {
   return (
     <div>
       <Paginator
-        totalUsersCount={totalUsersCount}
+        totalItemsCount={totalItemsCount}
         pageSize={pageSize}
         currentPage={currentPage}
         onClickPageHandler={onClickPageHandler}
