@@ -35,11 +35,30 @@ export type OwnPropsType = MapStatePropsType & MapDispatchPropsType;
 export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsType;
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
-  componentDidMount() {
-    let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
+  refreshProfile() {
+    let userId = this.props.match.params.userId;
+    if (!userId) {
+      userId = String(this.props.authorisedUserId);
+      if (!userId) {
+        this.props.history.push("/login");
+      }
+    }
 
     this.props.profileThunkCreator(userId);
     this.props.getProfileStatusThunkCreator(userId);
+  }
+
+  componentDidMount() {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
+    this.refreshProfile();
+
+    // let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
+    //
+    // this.props.profileThunkCreator(userId);
+    // this.props.getProfileStatusThunkCreator(userId);
   }
 
   render() {

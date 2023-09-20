@@ -19,11 +19,12 @@ export const ProfileInfo = ({ profile, status, updateStatus, ...props }: Profile
       </div>
     );
   }
+  let avatar = profile.photos?.small ? profile.photos.small : user;
 
   return (
     <div>
       <div className={s.profile__main}>
-        <img src={profile.photos?.small ? profile.photos.small : user} alt="avatar" className={s.profile__avatar} />
+        <img src={avatar} alt="avatar" className={s.profile__avatar} />
         <div>
           <div className={s.profile__name}>{profile.fullName}</div>
           <div className={s.aboutMe}>{profile.aboutMe}</div>
