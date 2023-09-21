@@ -35,6 +35,15 @@ export const authAPI = {
 };
 
 export const profileAPI = {
+  setPhoto(file: File) {
+    let formData = new FormData();
+    formData.append("image", file);
+    return instance.put(`/profile/photo`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   getProfile(userId: number) {
     return instance.get(`profile/` + +userId);
   },

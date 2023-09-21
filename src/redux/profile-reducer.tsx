@@ -1,6 +1,7 @@
 import { ActionsTypes } from "./store";
 import { Dispatch } from "redux";
 import { profileAPI } from "api/api";
+import profile from "components/Profile/Profile";
 
 export const ADD_POST = "ADD-POST";
 export const DELETE_POST = "DELETE_POST";
@@ -8,6 +9,7 @@ export const DELETE_POST = "DELETE_POST";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_PROFILE_STATUS = "SET_PROFILE_STATUS";
 export const UPDATE_PROFILE_STATUS = "UPDATE_PROFILE_STATUS";
+export const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 
 type PhotosType = {
   small: string;
@@ -25,12 +27,12 @@ type ContactsProfileType = {
 };
 
 export type ProfileType = {
-  aboutMe: string;
-  fullName: string;
-  photos: PhotosType | undefined;
-  userId: number;
-  contacts: ContactsProfileType;
-  lookingForAJob: boolean;
+  aboutMe?: string;
+  fullName?: string;
+  photos?: PhotosType | undefined;
+  userId?: number;
+  contacts?: ContactsProfileType | undefined;
+  lookingForAJob?: boolean;
 };
 
 export type PostDataPropsType = {
@@ -81,6 +83,16 @@ export const profileReducer = (
     case UPDATE_PROFILE_STATUS: {
       return { ...state, status: action.status };
     }
+    case SAVE_PHOTO_SUCCESS: {
+      // debugger;
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          photos: action.photos,
+        },
+      };
+    }
 
     default:
       return state;
@@ -98,6 +110,11 @@ export let setProfileStatus = (status: string) =>
   ({
     type: SET_PROFILE_STATUS,
     status,
+  }) as const;
+export let savePhotoSuccess = (photos: PhotosType) =>
+  ({
+    type: SAVE_PHOTO_SUCCESS,
+    photos,
   }) as const;
 
 export let updateProfileStatus = (status: string) =>
@@ -133,5 +150,19 @@ export const updateStatus = (status: string) => {
         dispatch(updateProfileStatus(status));
       }
     } catch (e) {}
+  };
+};
+
+export const savePhoto = (file: File) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      let response = await profileAPI.setPhoto(file);
+      if (response.data.resultCode === 0) {
+        // debugger;
+        dispatch(savePhotoSuccess(response.data.data.photos));
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 };

@@ -6,6 +6,7 @@ import {
   getProfileStatusThunkCreator,
   profileThunkCreator,
   ProfileType,
+  savePhoto,
   setUserProfile,
   updateStatus,
 } from "redux/profile-reducer";
@@ -26,6 +27,7 @@ type MapDispatchPropsType = {
   profileThunkCreator: (userId: string) => void;
   getProfileStatusThunkCreator: (userId: string) => void;
   updateStatus: (status: string) => void;
+  savePhoto: (file: File) => void;
 };
 type PathParamsType = {
   userId: string;
@@ -36,6 +38,11 @@ export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsTyp
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
   refreshProfile() {
+    // let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
+    //
+    // this.props.profileThunkCreator(userId);
+    // this.props.getProfileStatusThunkCreator(userId);
+
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = String(this.props.authorisedUserId);
@@ -49,16 +56,15 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
   }
 
   componentDidMount() {
+    // debugger;
     this.refreshProfile();
   }
 
   componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    this.refreshProfile();
-
-    // let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
-    //
-    // this.props.profileThunkCreator(userId);
-    // this.props.getProfileStatusThunkCreator(userId);
+    // debugger;
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.refreshProfile();
+    }
   }
 
   render() {
@@ -70,6 +76,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
       <div>
         <Profile
           {...this.props}
+          isOwner={!this.props.match.params.userId}
+          savePhoto={this.props.savePhoto}
           setUserProfile={this.props.setUserProfile}
           profile={this.props.profile}
           status={this.props.status}
@@ -89,6 +97,7 @@ let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
 
 export default compose<React.FC>(
   connect(mapStateToProps, {
+    savePhoto,
     setUserProfile,
     profileThunkCreator,
     getProfileStatusThunkCreator,
