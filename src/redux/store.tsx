@@ -17,7 +17,7 @@ import {
   toggleIsFollowingProgressAC,
   unfollowSuccess,
 } from "./users-reducer";
-import { setAuthUserDataAC, setUserAvatarAC } from "./auth-reducer";
+import { getCaptchaUrlAC, setAuthUserDataAC, setUserAvatarAC } from "./auth-reducer";
 import { initializedSuccess } from "./appReducer";
 
 type MessagesPropsType = {
@@ -125,4 +125,5 @@ export type ActionsTypes =
   | ReturnType<typeof updateProfileStatus>
   | ReturnType<typeof initializedSuccess>
   | ReturnType<typeof deletePostAC>
-  | ReturnType<typeof savePhotoSuccess>;
+  | ReturnType<typeof savePhotoSuccess>
+  | ReturnType<typeof getCaptchaUrlAC>;

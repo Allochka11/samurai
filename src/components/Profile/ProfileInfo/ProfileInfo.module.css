@@ -42,16 +42,24 @@
     margin-bottom: 10px;
 }
 
-.contacts {
-    width: 200px;
+.profileData {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 .contacts__icon {
     width: 30px;
     height: 30px;
+}
+
+.status {
+    display: flex;
 }
 

@@ -19,13 +19,17 @@ export const usersAPI = {
     return instance.delete(`follow/${id}`).then((response) => response.data);
   },
 };
-
+export const securityAPI = {
+  getCaptchaUrl() {
+    return instance.get(`security/get-captcha-url`);
+  },
+};
 export const authAPI = {
   me() {
     return instance.get(`auth/me`).then((response) => response.data);
   },
-  login(email: string, password: string, rememberMe: boolean = false) {
-    return instance.post(`/auth/login`, { email, password, rememberMe }).then((data) => {
+  login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
+    return instance.post(`/auth/login`, { email, password, rememberMe, captcha }).then((data) => {
       return data.data;
     });
   },

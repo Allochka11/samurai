@@ -3,11 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
 import { UsersPropsType } from "redux/users-reducer";
-
-type LocationPropsType = {
-  city: string;
-  country: string;
-};
+ 
 type PhotosType = {
   small: string;
   large: string;
@@ -56,10 +52,6 @@ export const User = ({ user, followThunkCreator, unfollowThunkCreator, following
           <span>
             <div>{user.name}</div>
             <div>{user.status}</div>
-          </span>
-          <span>
-            <div>{"el.location.city"}</div>
-            <div>{"el.location.country"}</div>
           </span>
         </span>
       </div>

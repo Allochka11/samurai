@@ -2,7 +2,6 @@ import React from "react";
 import { UsersPropsType } from "redux/users-reducer";
 import { Paginator } from "components/common/Paginator/Paginator";
 import { User } from "components/Users/User";
-import { PaginatorMadeMyself } from "components/common/Paginator/PaginatorMadeMyself";
 
 export type UsersType = {
   totalItemsCount: number;

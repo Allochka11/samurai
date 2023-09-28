@@ -27,7 +27,7 @@ function Profile1(props: ProfilePropsType) {
           <MyPostsContainer />
         </>
       ) : (
-        <LoginReduxForm />
+        <LoginReduxForm captchaUrl={""} />
       )}
     </div>
   );

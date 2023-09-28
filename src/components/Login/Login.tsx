@@ -1,25 +1,35 @@
 import React from "react";
 import { FormDataType, LoginReduxForm } from "./LoginForm";
 import ProfileContainer from "../Profile/ProfileContainer";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { loginUserThunkCreator } from "redux/auth-reducer";
 import { AppRootStateType } from "redux/redux-store";
 
 type MapDispatchType = {
-  loginUserThunkCreator: (email: string, password: string, rememberMe: boolean) => void;
+  loginUserThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void;
 };
-const Login = ({ loginUserThunkCreator }: MapDispatchType) => {
-  let isAuth = useSelector<AppRootStateType>((state) => state.auth.isAuth);
+type MapStatePropsType = {
+  isAuth: boolean;
+  captchaUrl: null | string;
+};
+
+const Login = (props: MapDispatchType & MapStatePropsType) => {
   let onSubmit = (formData: FormDataType) => {
-    let { email, password, rememberMe } = formData;
-    loginUserThunkCreator(email, password, rememberMe);
+    let { email, password, rememberMe, captcha } = formData;
+    props.loginUserThunkCreator(email, password, rememberMe, captcha);
   };
 
   return (
     <>
-      {isAuth && <ProfileContainer />}
-      {!isAuth && <LoginReduxForm onSubmit={onSubmit} />}
+      {props.isAuth && <ProfileContainer />}
+      {!props.isAuth && <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />}
     </>
   );
 };
-export default connect(null, { loginUserThunkCreator })(Login);
+
+const mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
+});
+
+export default connect(mapStateToProps, { loginUserThunkCreator })(Login);

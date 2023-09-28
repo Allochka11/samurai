@@ -4,12 +4,21 @@ import { Input } from "../common/FormControls/FormControls";
 import { required } from "utils/validators/validators";
 import s from "../common/FormControls/FormControls.module.css";
 
+export type LoginFormOwnProps = {
+  captchaUrl: string | null;
+};
+
 export type FormDataType = {
+  captcha: string | null;
   email: string;
   password: string;
   rememberMe: boolean;
 };
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSubmit, error }) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps> = ({
+  handleSubmit,
+  error,
+  captchaUrl,
+}) => {
   return (
     <>
       <p>
@@ -32,8 +41,20 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSubmit, er
         <div>
           <Field type="checkbox" name={"rememberMe"} component={"input"} />
         </div>
-
+        {captchaUrl && <img src={captchaUrl} />}
+        {captchaUrl && (
+          <div>
+            <Field
+              placeholder={"enter anti-bot symbols "}
+              name={"captcha"}
+              component={Input}
+              validate={[required]}
+              type={""}
+            />
+          </div>
+        )}
         {error && <div className={s.fieldSummaryError}>{error}</div>}
+
         <div>
           <button type={"submit"} name={"submit"}>
             Submit
@@ -44,6 +65,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSubmit, er
   );
 };
 
-export const LoginReduxForm = reduxForm<FormDataType>({
+export const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({
   form: "loginForm",
 })(LoginForm);
