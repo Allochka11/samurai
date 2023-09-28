@@ -136,9 +136,7 @@ export const getProfileStatusThunkCreator = (userId: string) => {
   return async (dispatch: Dispatch) => {
     try {
       let response = await profileAPI.getProfileStatus(+userId);
-      if (response) {
-        dispatch(setProfileStatus(response));
-      }
+      dispatch(setProfileStatus(response));
     } catch (e) {}
   };
 };
