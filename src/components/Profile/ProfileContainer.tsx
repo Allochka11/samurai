@@ -38,11 +38,6 @@ export type ProfilePropsType = RouteComponentProps<PathParamsType> & OwnPropsTyp
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
   refreshProfile() {
-    // let userId = this.props.match.params.userId || String(this.props.authorisedUserId);
-    //
-    // this.props.profileThunkCreator(userId);
-    // this.props.getProfileStatusThunkCreator(userId);
-
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = String(this.props.authorisedUserId);
@@ -56,12 +51,10 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
   }
 
   componentDidMount() {
-    // debugger;
     this.refreshProfile();
   }
 
   componentDidUpdate(prevProps: Readonly<ProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    // debugger;
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.refreshProfile();
     }
@@ -69,7 +62,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
   render() {
     if (!this.props.authorisedUserId && !this.props.match.params.userId) {
-      // return <Redirect to={'/login'}/>
       return <Login />;
     }
     return (

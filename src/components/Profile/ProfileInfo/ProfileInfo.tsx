@@ -37,7 +37,9 @@ export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto,
             <ProfileStatusWithHooks status={status} userId={profile.userId} updateStatus={updateStatus} />
           </div>
         </div>
-        <span>{isOwner && <input type={"file"} onChange={(e) => onMainPhotoSelected(e)} />}</span>
+        <span className={s.inputPhoto}>
+          {isOwner && <input type={"file"} onChange={(e) => onMainPhotoSelected(e)} />}
+        </span>
         <div className={s.contacts}>
           {profile.contacts && profile.contacts.twitter && (
             <span>

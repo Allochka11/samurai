@@ -1,11 +1,9 @@
 import { ActionsTypes } from "./store";
 import { Dispatch } from "redux";
 import { profileAPI } from "api/api";
-import profile from "components/Profile/Profile";
 
 export const ADD_POST = "ADD-POST";
 export const DELETE_POST = "DELETE_POST";
-// export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_PROFILE_STATUS = "SET_PROFILE_STATUS";
 export const UPDATE_PROFILE_STATUS = "UPDATE_PROFILE_STATUS";
@@ -42,7 +40,6 @@ export type PostDataPropsType = {
 };
 export type ProfilePagePropsType = {
   postData: PostDataPropsType[];
-  // newPostText: string
   profile: ProfileType | null;
   status: string;
 };
@@ -84,7 +81,6 @@ export const profileReducer = (
       return { ...state, status: action.status };
     }
     case SAVE_PHOTO_SUCCESS: {
-      // debugger;
       return {
         ...state,
         profile: {
@@ -156,7 +152,6 @@ export const savePhoto = (file: File) => {
     try {
       let response = await profileAPI.setPhoto(file);
       if (response.data.resultCode === 0) {
-        // debugger;
         dispatch(savePhotoSuccess(response.data.data.photos));
       }
     } catch (e) {

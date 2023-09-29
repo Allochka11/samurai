@@ -1,10 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import s from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
-import { HashRouter, Route, Switch } from "react-router-dom";
-// import { DialogsContainer } from "components/Dialogs/DialogsContainer";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
-// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import { connect, Provider } from "react-redux";
@@ -43,13 +41,15 @@ class App extends React.Component<AppType> {
         <div className={s.content__container}>
           <Navbar />
           <div className={s.content__right}>
-            <Suspense fallback={<div>.......Loading</div>}>
+            <Suspense fallback={<Preloader />}>
               <Switch>
                 <Route path="/dialogs" render={() => <DialogsContainer />} />
 
                 <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
                 <Route path="/users" render={() => <UsersContainer />} />
                 <Route path="/login" render={() => <Login />} />
+                <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+                <Route path="*" render={() => <div>404 not found</div>} />
               </Switch>
             </Suspense>
           </div>
@@ -65,7 +65,6 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
 
 const AppWithRouter = compose<React.FC>(withRouter, connect(mapStateToProps, { initializeAppThunkCreator }))(App);
 
-//for App.test
 const SamuraiApp = () => {
   return (
     <HashRouter>
